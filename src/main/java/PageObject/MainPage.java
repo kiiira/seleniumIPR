@@ -18,4 +18,5 @@ public class MainPage extends BasicPage {
         WebElement section = webDriver.findElementByXpath(testLink);
         webDriver.click(section);
     }
+
 }
