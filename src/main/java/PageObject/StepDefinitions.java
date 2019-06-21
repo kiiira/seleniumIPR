@@ -4,6 +4,7 @@ package PageObject;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import io.qameta.allure.Step;
+import jdk.jfr.StackTrace;
 import org.apache.log4j.Logger;
 
 public class StepDefinitions {
@@ -48,6 +49,7 @@ public class StepDefinitions {
     @And("^press \"([^\"]*)\" button$")
     public void pressButton(String buttonLabel) {
         mainPage.pressButton(buttonLabel);
+        log.info("");
     }
 
 
@@ -55,73 +57,84 @@ public class StepDefinitions {
     @And("^click \"([^\"]*)\" div button$")
     public void clickDivButton(String divButtonLabel) {
         mailPage.clickDivButton(divButtonLabel);
+        log.info("");
     }
 
 
+    @Step("Filling \"{0}]\" addressee field with value \"{1}\"")
     @And("^fill \"([^\"]*)\" addressee field with value \"([^\"]*)\"$")
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
         mailPage.fillTextAreaElementWithValue(fieldLabel, value);
+        log.info("");
     }
 
 
+    @Step("Filling \"{0}\" subject field with value \"{1}\"")
     @And("^fill \"([^\"]*)\" subject field with value \"([^\"]*)\"$")
     public void fillInputFieldValue(String fieldLabel, String value) {
         mailPage.fillInputElementWithValue(fieldLabel, value);
+        log.info("");
     }
 
 
+    @Step("Filling \"{0}\" text field with random value")
     @And("^fill \"([^\"]*)\" text field with random value$")
     public void fillDivTextFieldWithRandomValue(String fieldLabel) {
         mailPage.fillDivTextFieldWithRandomValue(fieldLabel);
+        log.info("");
     }
 
 
+    @Step("Clicking \"{0}\" button in letter title bar")
     @And("^click \"([^\"]*)\" button in letter title bar$")
     public void clickButtonInLetterTitleBar(String button) {
         mailPage.pressTitleBarButton(button);
+        log.info("");
     }
 
 
+    @Step("Navigating to \"{0}\" folder")
     @And("^go to \"([^\"]*)\" folder$")
     public void goToFolder(String folderLabel) {
         mailPage.openFolder(folderLabel);
+        log.info("");
     }
 
 
+    @Step("Checking template has been created")
     @And("^check template has been created$")
     public void checkTemplateCreated() {
         mailPage.checkTemplateCreated();
+        log.info("");
     }
 
 
+    @Step("Opening the letter template")
     @And("^open the template$")
     public void openTheTemplate() {
         mailPage.openTemplate();
-    }
-
-    @And("^the template has span field \"([^\"]*)\" as \"([^\"]*)\"$")
-    public void theTemplateHasSpanFieldAs(String fieldName, String value) {
-
-    }
-
-    @And("^the template has input field \"([^\"]*)\" as \"([^\"]*)\"$")
-    public void theTemplateHasInputFieldAs(String fieldName, String value) {
-
-    }
-
-    @And("^the template has div field \"([^\"]*)\" as \"([^\"]*)\"$")
-    public void theTemplateHasDivFieldAs(String fieldName, String value) {
-
-
+        log.info("");
     }
 
 
-    @And("^press \"([^\"]*)\" button after identifier$")
-    public void pressButtonAfterIdentifier(String arg0) {
+    @Step("Checking whether addressee field has value \"{1}\"")
+    @And("^the template has addressee field as \"([^\"]*)\"$")
+    public void checkTemplateAddressee(String value) {
+        mailPage.checkAddressee(value);
     }
 
-    @And("^press Next button after password$")
-    public void pressNextButtonAfterPassword() {
+
+    @Step("Checking whether subject field has value \"{1}\"")
+    @And("^the template has subject field as \"([^\"]*)\"$")
+    public void checkTemplateSubject(String value) {
+        mailPage.checkSubjectBox(value);
+    }
+
+
+    @Step("Checking whether body field has value \"{1}\"")
+    @And("^the template has body field as \"([^\"]*)\"$")
+    public void checkTemplateBody(String value) {
+        mailPage.checkLetterBody(value);
     }
 
 }

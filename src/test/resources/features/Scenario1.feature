@@ -16,10 +16,10 @@ Feature: MainPage
     And go to "Черновики" folder
     And check template has been created
     And open the template
+    And the template has addressee field as "testytest@test.com"
+    And the template has subject field as "This is a very small letter"
+    And the template has body field as "A teeny-tine one"
 
-#    And the template has span field "Адресат" as "testytest@test.com"
-#    And the template has input field "Тема письма" as "This is a very small letter"
-#    And the template has div field "Тело письма" as "A teeny-tine one"
 #    And press send button
 #    And go to templates
 #    Then template with header "" has been deleted

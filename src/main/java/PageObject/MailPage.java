@@ -16,9 +16,9 @@ public class MailPage extends BasicPage {
     private String titleBarButtonXpath = "//img[@aria-label='%s']";
     private String folderXpath = "//a[@title='%s']";
     private String templateXpath = "//span[contains(text(), '%s')]";
-    private String checkAddresseeXpath = "//span[@email='%s']";
-    private String checkSubjectXpath = "//input[@name='subjectbox']"; // getText/getValue
-    private String checkLetterBodyXpath = "//div[@aria-label='Тело письма']/pre[contains(text(), 'A teeny-tine one')]";
+    private String checkAddresseeXpath = "//span[@email]/ancestor::div[@tabindex='1']";
+    private String checkSubjectBoxXpath = "//input[@name='subjectbox']";
+    private String checkLetterBodyXpath = "//div[@role='textbox']";
 
 
     public void clickDivButton(String buttonText) {
@@ -68,6 +68,25 @@ public class MailPage extends BasicPage {
         WebElement template = webDriver.findElementByXpath(String.format(templateXpath + "/ancestor::div[@role='link']",
                 randomBodyText));
         webDriver.click(template);
+    }
+
+
+    public void checkAddressee(String expectedAddressee){
+        WebElement addressee = webDriver.findElementByXpath(checkAddresseeXpath);
+        Assert.assertEquals(addressee.getText(), expectedAddressee);
+    }
+
+
+    public void checkSubjectBox(String expectedSubjectText){
+        WebElement subjectBox = webDriver.findElementByXpath(checkSubjectBoxXpath);
+        Assert.assertEquals(subjectBox.getAttribute("value"), expectedSubjectText);
+    }
+
+
+    public void checkLetterBody(String expectedLetterBody){
+        expectedLetterBody = randomBodyText;
+        WebElement letterBody = webDriver.findElementByXpath(checkLetterBodyXpath);
+        Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }
 
 
