@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeSuite;
 
 import static Config.Utilities.WebDriver.webDriver;
 
+//TODO: move browser config to before
+// and set up window handler
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
@@ -22,6 +24,6 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
     @AfterSuite
     public void tearDown() {
-        webDriver.close();
+//        webDriver.close();
     }
 }

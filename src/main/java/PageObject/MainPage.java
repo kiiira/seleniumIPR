@@ -6,17 +6,31 @@ import org.openqa.selenium.WebElement;
 public class MainPage extends BasicPage {
 
 
-    String sectionXpath = "";
+    private String nextButtonXpath = "#identifierNext";
+    private String inputFieldXpath = "#%s";
+
 
     /**
-     * Opens section
+     * Clicks span-type button
      *
-     * @param sectionName section text label
+     * @param buttonLabel button text label
      */
-    public void openSection(String sectionName) {
-        String testLink = String.format(sectionXpath, sectionName);
-        WebElement section = webDriver.findElementByXpath(testLink);
+
+    //TODO: fix gherkin
+    //TODO: add different words to string builder
+    public void pressNextButton(String buttonLabel) {
+        WebElement section = webDriver.findElementByXpath(String.format(nextButtonXpath, buttonLabel));
         webDriver.click(section);
+    }
+
+    /**
+     *
+     * @param field
+     * @param value
+     */
+    public void fillInputFieldWithValue(String field, String value){
+        WebElement inputField = webDriver.findElementByCssSelector(String.format(inputFieldXpath, field));
+        webDriver.input(inputField, value);
     }
 
 }

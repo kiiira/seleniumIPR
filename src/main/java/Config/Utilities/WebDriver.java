@@ -1,9 +1,6 @@
 package Config.Utilities;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,25 +40,22 @@ public class WebDriver {
      * Class constructor
      */
     private WebDriver() {
-        ChromeDriver driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
+        ChromeDriver driver = new ChromeDriver(options);
         this.driver = driver;
+        wait = new WebDriverWait(driver, 10);
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
-        driver.manage().timeouts().pageLoadTimeout(2000, TimeUnit.MILLISECONDS);
-        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         options.addArguments("start-maximized");
         options.addArguments("enable-automation");
 //        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
         options.addArguments("--disable-infobars");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
         options.addArguments("--disable-gpu");
-
-        //very important one for Chrome version >= 72
-        options.addArguments("--disable-features=VizDisplayCompositor");
-
+        options.addArguments("enable-features=NetworkServiceInProcess");
+        // to handle timeout receiving message from render
+        options.setPageLoadStrategy(PageLoadStrategy.NONE);
     }
 
 
@@ -149,6 +143,7 @@ public class WebDriver {
      */
     public void input(WebElement element, String keys) {
         element.clear();
+        element.sendKeys(Keys.BACK_SPACE);
         element.sendKeys(keys);
     }
 
