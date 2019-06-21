@@ -1,13 +1,15 @@
 package PageObject;
 
-import cucumber.api.PendingException;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 
 public class StepDefinitions {
+
+
+    //TODO: add different words to string builder
 
     private MainPage mainPage = new MainPage();
     private MailPage mailPage = new MailPage();
@@ -15,7 +17,8 @@ public class StepDefinitions {
 
     private final Logger log = Logger.getLogger(Logger.class);
 
-    String testHost = "https://www.google.com/gmail/";
+    private String testHost = "https://www.google.com/gmail/";
+
 
     @Step("Opening test host...")
     @Given("test host open")
@@ -25,19 +28,26 @@ public class StepDefinitions {
     }
 
 
-    @Step("Click button {0}")
-    @And("^press \"([^\"]*)\" button$")
-    public void pressButton(String buttonLabel) {
-        mainPage.pressSpanButton(buttonLabel);
-        log.info(String.format("Button \"%s\" clicked", buttonLabel));
-
+    @Step("Filling e-mail field with value \"{0}\"")
+    @And("^fill e-mail field with value \"([^\"]*)\"$")
+    public void fillEMailFieldWithValue(String value) {
+        mainPage.fillEmailFieldWithValue(value);
+        log.info(String.format("E-mail field filled with value %s", value));
     }
 
-    @Step("Filling 'input' field \"{0}\" with value \"{1}\" ")
-    @And("^fill \"([^\"]*)\" field with value \"([^\"]*)\"$")
-    public void fillInputFieldWithValue(String fieldLabel, String textValue) {
-        mainPage.fillInputFieldWithValue(fieldLabel, textValue);
-        log.info(String.format("Field \"%s\" filled with value \"%s\"", fieldLabel, textValue));
+
+    @Step("Filling password field with value \"{0}\"")
+    @And("^fill password field with value \"([^\"]*)\"$")
+    public void fillPasswordFieldWithValue(String value) {
+        mainPage.fillPasswordFieldWithValue(value);
+        log.info(String.format("Password field filled with value %s", value));
+    }
+
+
+    @Step("Pressing \"{0}\" button")
+    @And("^press \"([^\"]*)\" button$")
+    public void pressButton(String buttonLabel) {
+        mainPage.pressButton(buttonLabel);
     }
 
 
@@ -48,19 +58,19 @@ public class StepDefinitions {
     }
 
 
-    @And("^fill \"([^\"]*)\" textarea field with value \"([^\"]*)\"$")
+    @And("^fill \"([^\"]*)\" addressee field with value \"([^\"]*)\"$")
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
         mailPage.fillTextAreaElementWithValue(fieldLabel, value);
     }
 
 
-    @And("^fill \"([^\"]*)\" input field value \"([^\"]*)\"$")
+    @And("^fill \"([^\"]*)\" subject field with value \"([^\"]*)\"$")
     public void fillInputFieldValue(String fieldLabel, String value) {
         mailPage.fillInputElementWithValue(fieldLabel, value);
     }
 
 
-    @And("^fill \"([^\"]*)\" div text field with random value$")
+    @And("^fill \"([^\"]*)\" text field with random value$")
     public void fillDivTextFieldWithRandomValue(String fieldLabel) {
         mailPage.fillDivTextFieldWithRandomValue(fieldLabel);
     }
@@ -104,4 +114,14 @@ public class StepDefinitions {
 
 
     }
+
+
+    @And("^press \"([^\"]*)\" button after identifier$")
+    public void pressButtonAfterIdentifier(String arg0) {
+    }
+
+    @And("^press Next button after password$")
+    public void pressNextButtonAfterPassword() {
+    }
+
 }

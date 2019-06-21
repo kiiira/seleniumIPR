@@ -15,6 +15,7 @@ public class MailPage extends BasicPage {
     private String divTextFieldXpath = "//div[@aria-label='%s']";
     private String titleBarButtonXpath = "//img[@aria-label='%s']";
     private String folderXpath = "//a[@title='%s']";
+    private String templateXpath = "//span[contains(text(), '%s')]";
     private String checkAddresseeXpath = "//span[@email='%s']";
     private String checkSubjectXpath = "//input[@name='subjectbox']"; // getText/getValue
     private String checkLetterBodyXpath = "//div[@aria-label='Тело письма']/pre[contains(text(), 'A teeny-tine one')]";
@@ -58,16 +59,16 @@ public class MailPage extends BasicPage {
 
 
     public void checkTemplateCreated() {
-        WebElement template = webDriver.findElementByXpath(String.format("//span[contains(text(), '%s')]", randomBodyText));
+        WebElement template = webDriver.findElementByXpath(String.format(templateXpath, randomBodyText));
         Assert.assertEquals(template.getText().replace(" - \n", ""), randomBodyText);
     }
 
 
-    public void openTemplate(){
-        WebElement template = webDriver.findElementByXpath(String.format("//span[contains(text(), '%s')]", randomBodyText));
+    public void openTemplate() {
+        WebElement template = webDriver.findElementByXpath(String.format(templateXpath + "/ancestor::div[@role='link']",
+                randomBodyText));
         webDriver.click(template);
     }
-
 
 
 }
