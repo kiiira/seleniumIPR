@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //TODO: fix chromedriver or chrome browser version (an older one needed)
@@ -27,6 +29,7 @@ public class WebDriver {
      * Singleton pattern to create WebDriver setup instance
      */
     public static WebDriver webDriver;
+
     public static WebDriver getInstance() {
         if (webDriver == null) {
             webDriver = new WebDriver();
@@ -54,6 +57,7 @@ public class WebDriver {
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-features=NetworkServiceInProcess");
+
         // to handle timeout receiving message from render
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
     }
@@ -79,6 +83,26 @@ public class WebDriver {
         }
         return element;
 
+    }
+
+
+    /**
+     * Selenium findElements(By.xpath()) wrapper
+     *
+     * @param xpath selector
+     * @return list of elements found by xpath
+     */
+    public List<WebElement> findElementListByXpath(String xpath) {
+        List<WebElement> listOfElements = null;
+        for (int i = 0; i < 3; i++) {
+            try {
+                listOfElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
+                return listOfElements;
+            } catch (StaleElementReferenceException se) {
+                continue;
+            }
+        }
+        return listOfElements;
     }
 
 

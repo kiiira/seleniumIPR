@@ -1,8 +1,10 @@
 package PageObject;
 
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import io.qameta.allure.Step;
 import jdk.jfr.StackTrace;
 import org.apache.log4j.Logger;
@@ -11,6 +13,7 @@ public class StepDefinitions {
 
 
     //TODO: add different words to string builder
+    //TODO: add logger appenders
 
     private MainPage mainPage = new MainPage();
     private MailPage mailPage = new MailPage();
@@ -102,9 +105,9 @@ public class StepDefinitions {
 
 
     @Step("Checking template has been created")
-    @And("^check template has been created$")
-    public void checkTemplateCreated() {
-        mailPage.checkTemplateCreated();
+    @And("^the letter has been created$")
+    public void checkLetterCreated() {
+        mailPage.checkLetterCreated();
         log.info("");
     }
 
@@ -131,10 +134,37 @@ public class StepDefinitions {
     }
 
 
-    @Step("Checking whether body field has value \"{1}\"")
-    @And("^the template has body field as \"([^\"]*)\"$")
-    public void checkTemplateBody(String value) {
-        mailPage.checkLetterBody(value);
+    @Step("Checking whether body field has value as randomly generated text")
+    @And("^the template has body field as randomly generated text$")
+    public void checkTemplateBody() {
+        mailPage.checkLetterBody();
     }
 
+
+    @Step("Clicking \"{0}\" button in letter window")
+    @And("^press \"([^\"]*)\" button in letter window$")
+    public void pressButtonInLetterWindow(String buttonLabel) {
+        mailPage.clickButtonInLetterWindow(buttonLabel);
+    }
+
+
+    @Step("Checking template deleted")
+    @Then("^the template has been deleted$")
+    public void theTemplateHasBeenDeleted() {
+        mailPage.checkTemplateDeleted();
+    }
+
+
+    @Step("Clicking account button")
+    @And("^press account button$")
+    public void pressAccountButton() {
+        mainPage.clickAccountButton();
+    }
+
+
+    @Step("Clicking \"{0}\" button in account pop-up")
+    @And("^press \"([^\"]*)\" button in account popup$")
+    public void pressButtonInAccountPopup(String buttonLabel) {
+        mainPage.clickAccountActionButton(buttonLabel);
+    }
 }

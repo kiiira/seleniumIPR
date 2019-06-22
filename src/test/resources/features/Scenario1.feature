@@ -9,23 +9,23 @@ Feature: MainPage
     And fill password field with value "testytest123"
     And press "Далее" button
     And click "Написать" div button
-    And fill "Кому" addressee field with value "testytest@test.com"
+    And fill "Кому" addressee field with value "testytest@test.test"
     And fill "Тема" subject field with value "This is a very small letter"
     And fill "Тело письма" text field with random value
     And click "Сохранить и закрыть" button in letter title bar
     And go to "Черновики" folder
-    And check template has been created
+    Then the letter has been created
     And open the template
-    And the template has addressee field as "testytest@test.com"
+    And the template has addressee field as "testytest@test.test"
     And the template has subject field as "This is a very small letter"
-    And the template has body field as "A teeny-tine one"
-
-#    And press send button
-#    And go to templates
-#    Then template with header "" has been deleted
-#    And open "Sent" section
-#    Then there is the lettter with header ""
-#    Then log out
+    And the template has body field as randomly generated text
+    And press "Отправить" button in letter window
+    And go to "Черновики" folder
+    Then the template has been deleted
+    And go to "Отправленные" folder
+    Then the letter has been created
+    And press account button
+    And press "Выйти" button in account popup
 
 
 
