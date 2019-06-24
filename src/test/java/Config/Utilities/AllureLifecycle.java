@@ -15,7 +15,7 @@ public class AllureLifecycle extends AllureCucumberJvm {
 
 //    @Attachment(type = "image/jpeg", value = "Screenshot on step")
 //    byte[] screenshot() {
-////        return ((TakesScreenshot) StepDefinitions.getChromeDriver().getScreenshotAs(OutputType.BYTES);
+////        return ((TakesScreenshot) Run.StepDefinitions.getChromeDriver().getScreenshotAs(OutputType.BYTES);
 //    }
 }
 

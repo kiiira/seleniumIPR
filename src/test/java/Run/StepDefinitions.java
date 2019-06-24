@@ -1,12 +1,12 @@
-package PageObject;
+package Run;
 
-
-import cucumber.api.PendingException;
+import PageObject.BasicPage;
+import PageObject.MailPage;
+import PageObject.MainPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.qameta.allure.Step;
-import jdk.jfr.StackTrace;
 import org.apache.log4j.Logger;
 
 public class StepDefinitions {
