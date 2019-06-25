@@ -9,7 +9,7 @@ import static HelpfulStuff.HelpfulShizzle.wordGenerator;
 
 public class MailPage extends BasicPage {
 
-    String randomBodyText = null;
+    String randomSubjectText = null;
 
     private String divButtonXpath = "//div[@role='button' and text()='%s']";
     private String textAreaFieldXpath = "//textarea[@aria-label='%s']";
@@ -17,7 +17,7 @@ public class MailPage extends BasicPage {
     private String divTextFieldXpath = "//div[@aria-label='%s']";
     private String titleBarButtonXpath = "//img[@aria-label='%s']";
     private String folderXpath = "//a[@title='%s']";
-    private String letterXpath = "//span[contains(text(), '%s')]";
+    private String letterXpath = "//div[@role='link']//span[@data-thread-id]";
     private String checkAddresseeXpath = "//span[@email]/ancestor::div[@tabindex='1']";
     private String checkSubjectBoxXpath = "//input[@name='subjectbox']";
     private String checkLetterBodyXpath = "//div[@role='textbox']";
@@ -38,16 +38,16 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void fillInputElementWithValue(String fieldName, String value) {
+    public void fillInputElementWithRandomValue(String fieldName) {
+        randomSubjectText = wordGenerator();
         WebElement inputElement = webDriver.findElementByXpath(String.format(inputFieldXpath, fieldName));
-        webDriver.input(inputElement, value);
+        webDriver.input(inputElement, randomSubjectText);
     }
 
 
-    public void fillDivTextFieldWithRandomValue(String fieldName) {
-        randomBodyText = wordGenerator();
+    public void fillDivTextFieldWithValue(String fieldName, String value) {
         WebElement divTextFieldElement = webDriver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
-        webDriver.input(divTextFieldElement, randomBodyText);
+        webDriver.input(divTextFieldElement, value);
     }
 
 
@@ -64,48 +64,49 @@ public class MailPage extends BasicPage {
 
 
     public void checkLetterCreated() {
-        WebElement template = webDriver.findElementByXpath(String.format(letterXpath, randomBodyText));
-        Assert.assertEquals(template.getText().replace(" - \n", ""), randomBodyText);
+        WebElement template = webDriver.findElementByXpath(letterXpath);
+        Assert.assertEquals(randomSubjectText, template.getText());
     }
 
 
     public void openTemplate() {
         WebElement template = webDriver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
-                randomBodyText));
+                randomSubjectText));
         webDriver.click(template);
     }
 
 
-    public void checkAddressee(String expectedAddressee){
+    public void checkAddressee(String expectedAddressee) {
         WebElement addressee = webDriver.findElementByXpath(checkAddresseeXpath);
         Assert.assertEquals(addressee.getText(), expectedAddressee);
     }
 
 
-    public void checkSubjectBox(String expectedSubjectText){
+    public void checkSubjectBox(String expectedSubjectText) {
         WebElement subjectBox = webDriver.findElementByXpath(checkSubjectBoxXpath);
         Assert.assertEquals(subjectBox.getAttribute("value"), expectedSubjectText);
     }
 
 
-    public void checkLetterBody(){
-        String expectedLetterBody = randomBodyText;
+    public void checkLetterBody() {
+        String expectedLetterBody = randomSubjectText;
         WebElement letterBody = webDriver.findElementByXpath(checkLetterBodyXpath);
         Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }
 
 
-    public void clickButtonInLetterWindow(String buttonLabel){
+    public void clickButtonInLetterWindow(String buttonLabel) {
         WebElement letterWindowButton = webDriver.findElementByXpath(String.format(letterWindowButtonXpath,
                 buttonLabel));
         webDriver.click(letterWindowButton);
     }
 
 
-    public void checkTemplateDeleted(){
+    public void checkTemplateDeleted() {
         List<WebElement> listOfTemplates = webDriver.findElementListByXpath(allTemplatesXpath);
-        for(WebElement template : listOfTemplates){
-            Assert.assertTrue(!template.getText().contains(randomBodyText));
+        for (WebElement template : listOfTemplates) {
+            String actualLetterText = template.getText();
+            Assert.assertTrue(!actualLetterText.contains(randomSubjectText));
         }
     }
 
