@@ -72,18 +72,18 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling \"{0}\" subject field with value \"{1}\"")
-    @And("^fill \"([^\"]*)\" subject field with value \"([^\"]*)\"$")
-    public void fillInputFieldValue(String fieldLabel, String value) {
-        mailPage.fillInputElementWithValue(fieldLabel, value);
+    @Step("Filling \"{0}\" subject field with random value")
+    @And("^fill \"([^\"]*)\" subject field with random value$")
+    public void fillInputFieldValue(String fieldLabel) {
+        mailPage.fillInputElementWithRandomValue(fieldLabel);
         log.info("");
     }
 
 
-    @Step("Filling \"{0}\" text field with random value")
-    @And("^fill \"([^\"]*)\" text field with random value$")
-    public void fillDivTextFieldWithRandomValue(String fieldLabel) {
-        mailPage.fillDivTextFieldWithRandomValue(fieldLabel);
+    @Step("Filling \"{0}\" text field with value \"{1}\"")
+    @And("^fill \"([^\"]*)\" text field with value \"([^\"]*)\"$")
+    public void fillDivTextFieldWithRandomValue(String fieldLabel, String inputText) {
+        mailPage.fillDivTextFieldWithValue(fieldLabel, inputText);
         log.info("");
     }
 
