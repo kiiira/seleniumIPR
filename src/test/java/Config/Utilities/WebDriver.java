@@ -9,8 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//TODO: fix chromedriver or chrome browser version (an older one needed)
-
 /**
  * ChromeDriver set up:
  */
@@ -47,8 +45,8 @@ public class WebDriver {
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         options.addArguments("start-maximized");
         options.addArguments("enable-automation");

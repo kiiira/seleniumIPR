@@ -83,7 +83,7 @@ public class StepDefinitions {
     @Step("Filling \"{0}\" text field with random value")
     @And("^fill \"([^\"]*)\" text field with random value$")
     public void fillDivTextFieldWithRandomValue(String fieldLabel) {
-        mailPage.fillDivTextFieldWithRandomValue(fieldLabel);
+//        mailPage.(fieldLabel);
         log.info("");
     }
 
@@ -128,14 +128,14 @@ public class StepDefinitions {
 
 
     @Step("Checking whether subject field has value \"{1}\"")
-    @And("^the template has subject field as \"([^\"]*)\"$")
+    @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject(String value) {
         mailPage.checkSubjectBox(value);
     }
 
 
     @Step("Checking whether body field has value as randomly generated text")
-    @And("^the template has body field as randomly generated text$")
+    @And("^the template has body field as \"([^\"]*)\"$")
     public void checkTemplateBody() {
         mailPage.checkLetterBody();
     }

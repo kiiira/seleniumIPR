@@ -3,6 +3,7 @@ package PageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static Config.Utilities.HelpfulShizzle.wordGenerator;
@@ -17,7 +18,7 @@ public class MailPage extends BasicPage {
     private String divTextFieldXpath = "//div[@aria-label='%s']";
     private String titleBarButtonXpath = "//img[@aria-label='%s']";
     private String folderXpath = "//a[@title='%s']";
-    private String letterXpath = "//span[contains(text(), '%s')]";
+    private String letterXpath = "//div[@role='main']//div[@role='link']//span[@data-thread-id]/text()";
     private String checkAddresseeXpath = "//span[@email]/ancestor::div[@tabindex='1']";
     private String checkSubjectBoxXpath = "//input[@name='subjectbox']";
     private String checkLetterBodyXpath = "//div[@role='textbox']";
@@ -44,10 +45,9 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void fillDivTextFieldWithRandomValue(String fieldName) {
-        randomBodyText = wordGenerator();
+    public void fillDivTextFieldWithValue(String fieldName, String value) {
         WebElement divTextFieldElement = webDriver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
-        webDriver.input(divTextFieldElement, randomBodyText);
+        webDriver.input(divTextFieldElement, value);
     }
 
 
@@ -76,13 +76,13 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void checkAddressee(String expectedAddressee){
+    public void checkAddressee(String expectedAddressee) {
         WebElement addressee = webDriver.findElementByXpath(checkAddresseeXpath);
         Assert.assertEquals(addressee.getText(), expectedAddressee);
     }
 
 
-    public void checkSubjectBox(String expectedSubjectText){
+    public void checkSubjectBox(String expectedSubjectText) {
         WebElement subjectBox = webDriver.findElementByXpath(checkSubjectBoxXpath);
         Assert.assertEquals(subjectBox.getAttribute("value"), expectedSubjectText);
     }
@@ -95,19 +95,19 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void clickButtonInLetterWindow(String buttonLabel){
+    public void clickButtonInLetterWindow(String buttonLabel) {
         WebElement letterWindowButton = webDriver.findElementByXpath(String.format(letterWindowButtonXpath,
                 buttonLabel));
         webDriver.click(letterWindowButton);
     }
 
 
-    public void checkTemplateDeleted(){
+    public void checkTemplateDeleted() {
         List<WebElement> listOfTemplates = webDriver.findElementListByXpath(allTemplatesXpath);
-        for(WebElement template : listOfTemplates){
-            Assert.assertTrue(!template.getText().contains(randomBodyText));
+        for (WebElement template : listOfTemplates) {
+            String actualLetterText = template.getText();
+            Assert.assertTrue(!actualLetterText.contains(randomBodyText));
         }
     }
 
 }
-
