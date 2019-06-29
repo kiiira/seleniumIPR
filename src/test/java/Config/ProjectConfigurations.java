@@ -2,7 +2,7 @@ package Config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("file: config.properties")
+@Config.Sources("file:config.properties")
 public interface ProjectConfigurations extends Config{
 
     String testHost();
@@ -18,5 +18,8 @@ public interface ProjectConfigurations extends Config{
 
     @DefaultValue("test/resources/features")
     String testDataDirectory();
+
+    @DefaultValue("true")
+    boolean takeScreenshot();
 
 }

@@ -24,7 +24,6 @@ public class StepDefinitions {
     private String testHost = "https://www.google.com/gmail/";
 
 
-    @Step("Opening test host...")
     @Given("test host open")
     public void openHost() {
         basicPage.navigateTo(this.testHost);
@@ -32,7 +31,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling e-mail field with value \"{0}\"")
     @And("^fill e-mail field with value \"([^\"]*)\"$")
     public void fillEMailFieldWithValue(String value) {
         mainPage.fillEmailFieldWithValue(value);
@@ -40,7 +38,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling password field with value \"{0}\"")
     @And("^fill password field with value \"([^\"]*)\"$")
     public void fillPasswordFieldWithValue(String value) {
         mainPage.fillPasswordFieldWithValue(value);
@@ -48,7 +45,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Pressing \"{0}\" button")
     @And("^press \"([^\"]*)\" button$")
     public void pressButton(String buttonLabel) {
         mainPage.pressButton(buttonLabel);
@@ -56,7 +52,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Click div button {0}")
     @And("^click \"([^\"]*)\" div button$")
     public void clickDivButton(String divButtonLabel) {
         mailPage.clickDivButton(divButtonLabel);
@@ -64,7 +59,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling \"{0}]\" addressee field with value \"{1}\"")
     @And("^fill \"([^\"]*)\" addressee field with value \"([^\"]*)\"$")
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
         mailPage.fillTextAreaElementWithValue(fieldLabel, value);
@@ -72,7 +66,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling \"{0}\" subject field with value \"{1}\"")
     @And("^fill \"([^\"]*)\" subject field with value \"([^\"]*)\"$")
     public void fillInputFieldValue(String fieldLabel, String value) {
         mailPage.fillInputElementWithValue(fieldLabel, value);
@@ -80,7 +73,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Filling \"{0}\" text field with random value")
     @And("^fill \"([^\"]*)\" text field with random value$")
     public void fillDivTextFieldWithRandomValue(String fieldLabel) {
 //        mailPage.(fieldLabel);
@@ -88,7 +80,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Clicking \"{0}\" button in letter title bar")
     @And("^click \"([^\"]*)\" button in letter title bar$")
     public void clickButtonInLetterTitleBar(String button) {
         mailPage.pressTitleBarButton(button);
@@ -96,7 +87,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Navigating to \"{0}\" folder")
     @And("^go to \"([^\"]*)\" folder$")
     public void goToFolder(String folderLabel) {
         mailPage.openFolder(folderLabel);
@@ -104,7 +94,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Checking template has been created")
     @And("^the letter has been created$")
     public void checkLetterCreated() {
         mailPage.checkLetterCreated();
@@ -112,7 +101,6 @@ public class StepDefinitions {
     }
 
 
-    @Step("Opening the letter template")
     @And("^open the template$")
     public void openTheTemplate() {
         mailPage.openTemplate();
@@ -120,49 +108,42 @@ public class StepDefinitions {
     }
 
 
-    @Step("Checking whether addressee field has value \"{1}\"")
     @And("^the template has addressee field as \"([^\"]*)\"$")
     public void checkTemplateAddressee(String value) {
         mailPage.checkAddressee(value);
     }
 
 
-    @Step("Checking whether subject field has value \"{1}\"")
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject(String value) {
         mailPage.checkSubjectBox(value);
     }
 
 
-    @Step("Checking whether body field has value as randomly generated text")
     @And("^the template has body field as \"([^\"]*)\"$")
     public void checkTemplateBody() {
         mailPage.checkLetterBody();
     }
 
 
-    @Step("Clicking \"{0}\" button in letter window")
     @And("^press \"([^\"]*)\" button in letter window$")
     public void pressButtonInLetterWindow(String buttonLabel) {
         mailPage.clickButtonInLetterWindow(buttonLabel);
     }
 
 
-    @Step("Checking template deleted")
     @Then("^the template has been deleted$")
     public void theTemplateHasBeenDeleted() {
         mailPage.checkTemplateDeleted();
     }
 
 
-    @Step("Clicking account button")
     @And("^press account button$")
     public void pressAccountButton() {
         mainPage.clickAccountButton();
     }
 
 
-    @Step("Clicking \"{0}\" button in account pop-up")
     @And("^press \"([^\"]*)\" button in account popup$")
     public void pressButtonInAccountPopup(String buttonLabel) {
         mainPage.clickAccountActionButton(buttonLabel);
