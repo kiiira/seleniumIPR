@@ -1,8 +1,6 @@
 package Run;
 
-import PageObject.BasicPage;
-import PageObject.MailPage;
-import PageObject.MainPage;
+import PageObject.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,8 +13,10 @@ public class StepDefinitions {
     //TODO: add different words to string builder
     //TODO: add logger appenders
 
+    private LoginPage loginPage = new LoginPage();
     private MainPage mainPage = new MainPage();
     private MailPage mailPage = new MailPage();
+    private LetterPage letterPage = new LetterPage();
     private BasicPage basicPage = new MainPage();
 
     private final Logger log = Logger.getLogger(Logger.class);
@@ -33,21 +33,21 @@ public class StepDefinitions {
 
     @And("^fill e-mail field with value \"([^\"]*)\"$")
     public void fillEMailFieldWithValue(String value) {
-        mainPage.fillEmailFieldWithValue(value);
+        loginPage.fillEmailFieldWithValue(value);
         log.info(String.format("E-mail field filled with value %s", value));
     }
 
 
     @And("^fill password field with value \"([^\"]*)\"$")
     public void fillPasswordFieldWithValue(String value) {
-        mainPage.fillPasswordFieldWithValue(value);
+        loginPage.fillPasswordFieldWithValue(value);
         log.info(String.format("Password field filled with value %s", value));
     }
 
 
     @And("^press \"([^\"]*)\" button$")
     public void pressButton(String buttonLabel) {
-        mainPage.pressButton(buttonLabel);
+        loginPage.pressButton(buttonLabel);
         log.info("");
     }
 
@@ -61,28 +61,28 @@ public class StepDefinitions {
 
     @And("^fill \"([^\"]*)\" addressee field with value \"([^\"]*)\"$")
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
-        mailPage.fillTextAreaElementWithValue(fieldLabel, value);
+        letterPage.fillTextAreaElementWithValue(fieldLabel, value);
         log.info("");
     }
 
 
-    @And("^fill \"([^\"]*)\" subject field with value \"([^\"]*)\"$")
-    public void fillInputFieldValue(String fieldLabel, String value) {
-        mailPage.fillInputElementWithValue(fieldLabel, value);
+    @And("^fill \"([^\"]*)\" subject field with random value$")
+    public void fillInputFieldValue(String fieldLabel) {
+        letterPage.fillInputElementWithRandomValue(fieldLabel);
         log.info("");
     }
 
 
-    @And("^fill \"([^\"]*)\" text field with random value$")
-    public void fillDivTextFieldWithRandomValue(String fieldLabel) {
-//        mailPage.(fieldLabel);
+    @And("^fill \"([^\"]*)\" text field with value \"([^\"]*)\"$")
+    public void fillDivTextFieldWithRandomValue(String fieldLabel, String inputText) {
+        letterPage.fillDivTextFieldWithValue(fieldLabel, inputText);
         log.info("");
     }
 
 
     @And("^click \"([^\"]*)\" button in letter title bar$")
     public void clickButtonInLetterTitleBar(String button) {
-        mailPage.pressTitleBarButton(button);
+        letterPage.pressTitleBarButton(button);
         log.info("");
     }
 
@@ -110,25 +110,25 @@ public class StepDefinitions {
 
     @And("^the template has addressee field as \"([^\"]*)\"$")
     public void checkTemplateAddressee(String value) {
-        mailPage.checkAddressee(value);
+        letterPage.checkAddressee(value);
     }
 
 
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject(String value) {
-        mailPage.checkSubjectBox(value);
+        letterPage.checkSubjectBox(value);
     }
 
 
     @And("^the template has body field as \"([^\"]*)\"$")
     public void checkTemplateBody() {
-        mailPage.checkLetterBody();
+        letterPage.checkLetterBody();
     }
 
 
     @And("^press \"([^\"]*)\" button in letter window$")
     public void pressButtonInLetterWindow(String buttonLabel) {
-        mailPage.clickButtonInLetterWindow(buttonLabel);
+        letterPage.clickButtonInLetterWindow(buttonLabel);
     }
 
 

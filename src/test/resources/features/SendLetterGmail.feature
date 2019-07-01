@@ -10,8 +10,8 @@ Feature: MainPage
     And press "Далее" button
     And click "Написать" div button
     And fill "Кому" addressee field with value "testytest@test.test"
-    And fill "Тема" subject field with value "This is a very small letter"
-    And fill "Тело письма" text field with random value
+    And fill "Тема" subject field with random value
+    And fill "Тело письма" text field with value "This is a very small letter"
     And click "Сохранить и закрыть" button in letter title bar
     And go to "Черновики" folder
     Then the letter has been created
