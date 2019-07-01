@@ -2,15 +2,11 @@ package PageObject;
 
 import org.openqa.selenium.WebElement;
 
-
-public class MainPage extends BasicPage {
-
+public class LoginPage extends BasicPage {
 
     private String nextButtonXpath = "//span[contains(text(), '%s')]";
     private String emailCss = "#identifierId";
     private String passCss = "#password input";
-    private String identifierIconXpath = "//a[contains(@aria-label, 'Аккаунт Google')]";
-    private String accountActionButtonXpath = "//a[contains(text(), 'Выйти')]";
 
 
     public void pressButton(String fieldName) {
@@ -28,17 +24,6 @@ public class MainPage extends BasicPage {
     public void fillPasswordFieldWithValue(String value){
         WebElement passInputField = webDriver.findElementByCssSelector(passCss);
         webDriver.input(passInputField, value);
-    }
-
-
-    public void clickAccountButton(){
-        webDriver.findElementByXpath(identifierIconXpath).click();
-
-    }
-
-
-    public void clickAccountActionButton(String buttonLabel){
-        webDriver.findElementByXpath(accountActionButtonXpath).click();
     }
 
 }

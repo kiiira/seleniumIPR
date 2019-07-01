@@ -1,6 +1,6 @@
 Feature: MainPage
 
-  @Test
+  @Gmail
   Scenario: 01 - Main page operations
 
     Given test host open
@@ -17,8 +17,8 @@ Feature: MainPage
     Then the letter has been created
     And open the template
     And the template has addressee field as "testytest@test.test"
-    And the template has subject field as "This is a very small letter"
-    And the template has body field as randomly generated text
+    And the template has subject field as randomly generated text
+    And the template has body field as "This is a very small letter"
     And press "Отправить" button in letter window
     And go to "Черновики" folder
     Then the template has been deleted

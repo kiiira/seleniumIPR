@@ -1,35 +1,23 @@
 package PageObject;
 
+import Config.Utilities.HelpfulShizzle;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.List;
+import static Config.Utilities.HelpfulShizzle.wordGenerator;
 
-import static HelpfulStuff.HelpfulShizzle.wordGenerator;
+public class LetterPage extends BasicPage {
 
-public class MailPage extends BasicPage {
+    public static String randomBodyText = null;
 
-    String randomSubjectText = null;
-
-    private String divButtonXpath = "//div[@role='button' and text()='%s']";
     private String textAreaFieldXpath = "//textarea[@aria-label='%s']";
     private String inputFieldXpath = "//input[@aria-label='%s']";
     private String divTextFieldXpath = "//div[@aria-label='%s']";
     private String titleBarButtonXpath = "//img[@aria-label='%s']";
-    private String folderXpath = "//a[@title='%s']";
-    private String letterXpath = "//div[@role='link']//span[@data-thread-id]";
     private String checkAddresseeXpath = "//span[@email]/ancestor::div[@tabindex='1']";
     private String checkSubjectBoxXpath = "//input[@name='subjectbox']";
     private String checkLetterBodyXpath = "//div[@role='textbox']";
     private String letterWindowButtonXpath = "//div[@role = 'button' and contains(@aria-label, '%s')]";
-    private String allTemplatesXpath = "//tr[@aria-labelledby]//div[@role='link']//span[text()='This is a very small letter']" +
-            "/parent::span/parent::div/following-sibling::span[contains(text(), '')]";
-
-
-    public void clickDivButton(String buttonText) {
-        WebElement divButton = webDriver.findElementByXpath(String.format(divButtonXpath, buttonText));
-        webDriver.click(divButton);
-    }
 
 
     public void fillTextAreaElementWithValue(String fieldName, String value) {
@@ -39,9 +27,9 @@ public class MailPage extends BasicPage {
 
 
     public void fillInputElementWithRandomValue(String fieldName) {
-        randomSubjectText = wordGenerator();
         WebElement inputElement = webDriver.findElementByXpath(String.format(inputFieldXpath, fieldName));
-        webDriver.input(inputElement, randomSubjectText);
+        randomBodyText = wordGenerator();
+        webDriver.input(inputElement, randomBodyText);
     }
 
 
@@ -57,25 +45,6 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void openFolder(String folderLabel) {
-        WebElement section = webDriver.findElementByXpath(String.format(folderXpath, folderLabel));
-        webDriver.click(section);
-    }
-
-
-    public void checkLetterCreated() {
-        WebElement template = webDriver.findElementByXpath(letterXpath);
-        Assert.assertEquals(randomSubjectText, template.getText());
-    }
-
-
-    public void openTemplate() {
-        WebElement template = webDriver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
-                randomSubjectText));
-        webDriver.click(template);
-    }
-
-
     public void checkAddressee(String expectedAddressee) {
         WebElement addressee = webDriver.findElementByXpath(checkAddresseeXpath);
         Assert.assertEquals(addressee.getText(), expectedAddressee);
@@ -88,8 +57,8 @@ public class MailPage extends BasicPage {
     }
 
 
-    public void checkLetterBody() {
-        String expectedLetterBody = randomSubjectText;
+    public void checkLetterBody(){
+        String expectedLetterBody = randomBodyText;
         WebElement letterBody = webDriver.findElementByXpath(checkLetterBodyXpath);
         Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }
@@ -101,14 +70,4 @@ public class MailPage extends BasicPage {
         webDriver.click(letterWindowButton);
     }
 
-
-    public void checkTemplateDeleted() {
-        List<WebElement> listOfTemplates = webDriver.findElementListByXpath(allTemplatesXpath);
-        for (WebElement template : listOfTemplates) {
-            String actualLetterText = template.getText();
-            Assert.assertTrue(!actualLetterText.contains(randomSubjectText));
-        }
-    }
-
 }
-
