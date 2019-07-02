@@ -51,14 +51,13 @@ public class LetterPage extends BasicPage {
     }
 
 
-    public void checkSubjectBox(String expectedSubjectText) {
+    public void checkSubjectBox() {
         WebElement subjectBox = webDriver.findElementByXpath(checkSubjectBoxXpath);
-        Assert.assertEquals(subjectBox.getAttribute("value"), expectedSubjectText);
+        Assert.assertEquals(subjectBox.getAttribute("value"), randomBodyText);
     }
 
 
-    public void checkLetterBody(){
-        String expectedLetterBody = randomBodyText;
+    public void checkLetterBody(String expectedLetterBody){
         WebElement letterBody = webDriver.findElementByXpath(checkLetterBodyXpath);
         Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }

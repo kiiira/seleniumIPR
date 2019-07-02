@@ -115,14 +115,14 @@ public class StepDefinitions {
 
 
     @And("^the template has subject field as randomly generated text$")
-    public void checkTemplateSubject(String value) {
-        letterPage.checkSubjectBox(value);
+    public void checkTemplateSubject() {
+        letterPage.checkSubjectBox();
     }
 
 
     @And("^the template has body field as \"([^\"]*)\"$")
-    public void checkTemplateBody() {
-        letterPage.checkLetterBody();
+    public void checkTemplateBody(String expectedLetterBody) {
+        letterPage.checkLetterBody(expectedLetterBody);
     }
 
 

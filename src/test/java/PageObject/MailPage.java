@@ -1,5 +1,6 @@
 package PageObject;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -11,7 +12,8 @@ public class MailPage extends BasicPage {
 
     private String divButtonXpath = "//div[@role='button' and text()='%s']";
     private String folderXpath = "//a[@title='%s']";
-    private String letterXpath = "//div[@role='main']//div[@role='link']//*[@data-thread-id]/text()";
+    private String letterXpath = "//div[@role='main']//tr[@draggable='true']//div[@role='link']" +
+            "//*[@data-thread-id][contains(text(), '%s')]";
     private String allTemplatesXpath = "//tr[@aria-labelledby]//div[@role='link']//span[text()='This is a very small letter']" +
             "/parent::span/parent::div/following-sibling::span[contains(text(), '')]";
 
@@ -29,9 +31,13 @@ public class MailPage extends BasicPage {
 
 
     public void checkLetterCreated() {
-        WebElement template = webDriver.findElementByXpath(letterXpath);
-        String extractedText = template.getText();
-        Assert.assertEquals(extractedText, randomBodyText);
+        try {
+            WebElement template = webDriver.findElementByXpath(String.format(letterXpath, randomBodyText));
+
+        } catch (StaleElementReferenceException e) {
+            System.out.println("Element does not exist anymore");
+        }
+
     }
 
 
