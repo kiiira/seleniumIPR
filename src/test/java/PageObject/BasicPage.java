@@ -4,6 +4,7 @@ import Config.Utilities.WebDriver;
 
 public abstract class BasicPage {
 
+
     /**
      * Driver instantiation
      */
