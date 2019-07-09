@@ -26,6 +26,6 @@ OPEN ANOTHER COMMAND PROMT
 java -jar "C:/path/to/jar" -role node -hub http://localhost:4444/grid/register
 ```
 
-refresh grid console
+refresh grid console and
 *voilà*
 
