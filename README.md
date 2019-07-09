@@ -4,9 +4,11 @@
 java -jar jenkins.war 
 
 **free needed port:**
+```
 netstat -an | find /i "listening"       list of all listening ports
 netstat -ano | findstr :4444            find a certain listening port
 taskkill/PID 1140/F                     kill the port by its ID ^
+```
 
 
 **setup Selenium Grid:**
