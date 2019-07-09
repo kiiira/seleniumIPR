@@ -13,6 +13,14 @@
         <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.4</aspectj.version>
+        <log4j.version>1.2.17</log4j.version>
+        <testng.version>6.14.3</testng.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <cucumber.version>4.4.0</cucumber.version>
+        <selenium.version>3.141.59</selenium.version>
+        <allure.version>2.10.0</allure.version>
+        <surefire.version>2.22.2</surefire.version>
+
     </properties>
 
     <build>
@@ -20,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${surefire.version}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
@@ -44,6 +52,16 @@
 
                 </dependencies>
             </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>allure-results</resultsDirectory>
+                </configuration>
+            </plugin>
         </plugins>
 
 
@@ -54,7 +72,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -63,48 +81,41 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>4.4.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>4.4.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.3</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
 
         <!--allure-->
 
-
-        <!--<dependency>-->
-            <!--<groupId>io.qameta.allure</groupId>-->
-            <!--<artifactId>allure-testng</artifactId>-->
-            <!--<version>2.10.0</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber4-jvm</artifactId>
-            <version>2.10.0</version>
+            <version>${allure.version}</version>
         </dependency>
 
         <!--jackson json data reader-->
@@ -116,6 +127,7 @@
         </dependency>
 
         <!--properties file reader-->
+        <!--might delete later-->
 
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
@@ -127,7 +139,7 @@
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.2</version>
+            <version>${surefire.version}</version>
         </dependency>
 
     </dependencies>
