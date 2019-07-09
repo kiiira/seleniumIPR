@@ -5,7 +5,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static Config.Utilities.WebDriver.webDriver;
+import static Utils.WebDriver.webDriver;
 
 
 @CucumberOptions(
@@ -23,8 +23,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
     @AfterSuite
     public void tearDown() {
-//        webDriver.close();
+        webDriver.close();
     }
-
 
 }

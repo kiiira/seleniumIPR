@@ -1,6 +1,6 @@
 package PageObject;
 
-import Config.Utilities.WebDriver;
+import Utils.WebDriver;
 
 public abstract class BasicPage {
 

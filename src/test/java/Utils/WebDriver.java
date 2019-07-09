@@ -1,4 +1,4 @@
-package Config.Utilities;
+package Utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,18 +45,15 @@ public class WebDriver {
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
+
+        options.addArguments("start-maximized");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.setPageLoadStrategy(PageLoadStrategy.NONE);
+
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        options.addArguments("start-maximized");
-        options.addArguments("enable-automation");
-//        options.addArguments("--headless");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-features=NetworkServiceInProcess");
-
-        // to handle timeout receiving message from render
-        options.setPageLoadStrategy(PageLoadStrategy.NONE);
     }
 
 

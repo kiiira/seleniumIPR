@@ -1,4 +1,4 @@
-package Config.Utilities;
+package Utils;
 
 public class HelpfulShizzle {
 

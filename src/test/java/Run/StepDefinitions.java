@@ -11,9 +11,6 @@ import static PageObject.LetterPage.randomBodyText;
 
 public class StepDefinitions {
 
-
-    //TODO: add different words to string builder
-
     private LoginPage loginPage = new LoginPage();
     private MainPage mainPage = new MainPage();
     private MailPage mailPage = new MailPage();

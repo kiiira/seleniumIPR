@@ -1,10 +1,9 @@
 package PageObject;
 
-import Config.Utilities.HelpfulShizzle;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import static Config.Utilities.HelpfulShizzle.wordGenerator;
+import static Utils.HelpfulShizzle.wordGenerator;
 
 public class LetterPage extends BasicPage {
 
