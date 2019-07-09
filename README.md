@@ -2,7 +2,7 @@
 
 mvn io.qameta.allure:allure-maven:serve  to   run allure report
 
-java -jar jenkins.war to run jenins
+java -jar jenkins.war to run jenkins
 
 free needed port:
 netstat -an | find /i "listening"       list of all listening ports
