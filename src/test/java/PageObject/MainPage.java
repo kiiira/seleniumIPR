@@ -1,7 +1,5 @@
 package PageObject;
 
-import org.openqa.selenium.WebElement;
-
 
 public class MainPage extends BasicPage {
 
@@ -11,13 +9,13 @@ public class MainPage extends BasicPage {
 
 
     public void clickAccountButton(){
-        webDriver.findElementByXpath(identifierIconXpath).click();
+        driver.findElementByXpath(identifierIconXpath).click();
 
     }
 
 
     public void clickAccountActionButton(String buttonLabel){
-        webDriver.findElementByXpath(accountActionButtonXpath).click();
+        driver.findElementByXpath(accountActionButtonXpath).click();
     }
 
 }

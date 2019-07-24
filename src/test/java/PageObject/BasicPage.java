@@ -1,6 +1,6 @@
 package PageObject;
 
-import Config.Utilities.WebDriver;
+import Utils.CustomDriver;
 
 public abstract class BasicPage {
 
@@ -8,10 +8,17 @@ public abstract class BasicPage {
     /**
      * Driver instantiation
      */
-    WebDriver webDriver = WebDriver.getInstance();
+    CustomDriver driver = CustomDriver.getInstance();
 
-    public void navigateTo(String url){
-        webDriver.get(url);
+
+    /**
+     * Selenium "get" method wrapper
+     *
+     * @param url to navigate
+     */
+    public void navigate(String url) {
+        driver.get(url);
     }
+
 
 }

@@ -10,20 +10,20 @@ public class LoginPage extends BasicPage {
 
 
     public void pressButton(String fieldName) {
-        WebElement section = webDriver.findElementByXpath(String.format(nextButtonXpath, fieldName));
-        webDriver.click(section);
+        WebElement section = driver.findElementByXpath(String.format(nextButtonXpath, fieldName));
+        driver.click(section);
     }
 
 
     public void fillEmailFieldWithValue(String value){
-        WebElement emailInputField = webDriver.findElementByCssSelector(emailCss);
-        webDriver.input(emailInputField, value);
+        WebElement emailInputField = driver.findElementByCssSelector(emailCss);
+        driver.input(emailInputField, value);
     }
 
 
     public void fillPasswordFieldWithValue(String value){
-        WebElement passInputField = webDriver.findElementByCssSelector(passCss);
-        webDriver.input(passInputField, value);
+        WebElement passInputField = driver.findElementByCssSelector(passCss);
+        driver.input(passInputField, value);
     }
 
 }

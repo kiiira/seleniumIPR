@@ -4,15 +4,13 @@ import PageObject.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static PageObject.LetterPage.randomBodyText;
 
 public class StepDefinitions {
-
-
-    //TODO: add different words to string builder
 
     private LoginPage loginPage = new LoginPage();
     private MainPage mainPage = new MainPage();
@@ -20,25 +18,28 @@ public class StepDefinitions {
     private LetterPage letterPage = new LetterPage();
     private BasicPage basicPage = new MainPage();
 
-    static final Logger LOG = LogManager.getLogger(StepDefinitions.class.getName());
+    //TODO: fix updated logger
+    private static final Logger LOG = LogManager.getLogger(StepDefinitions.class);
 
     private String testHost = "https://www.google.com/gmail/";
 
 
+    @Step ("Opening test host")
     @Given("test host open")
     public void openHost() {
-        basicPage.navigateTo(this.testHost);
+        basicPage.navigate(this.testHost);
         LOG.info("Test host opened");
     }
 
 
+    @Step("Filling email field with value \"{0}\"")
     @And("^fill e-mail field with value \"([^\"]*)\"$")
     public void fillEMailFieldWithValue(String value) {
         loginPage.fillEmailFieldWithValue(value);
         LOG.info(String.format("E-mail field filled with value %s", value));
     }
 
-
+    @Step("Filling password field with value \"{0}\"")
     @And("^fill password field with value \"([^\"]*)\"$")
     public void fillPasswordFieldWithValue(String value) {
         loginPage.fillPasswordFieldWithValue(value);

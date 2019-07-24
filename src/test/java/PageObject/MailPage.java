@@ -19,20 +19,20 @@ public class MailPage extends BasicPage {
 
 
     public void clickDivButton(String buttonText) {
-        WebElement divButton = webDriver.findElementByXpath(String.format(divButtonXpath, buttonText));
-        webDriver.click(divButton);
+        WebElement divButton = driver.findElementByXpath(String.format(divButtonXpath, buttonText));
+        driver.click(divButton);
     }
 
 
     public void openFolder(String folderLabel) {
-        WebElement section = webDriver.findElementByXpath(String.format(folderXpath, folderLabel));
-        webDriver.click(section);
+        WebElement section = driver.findElementByXpath(String.format(folderXpath, folderLabel));
+        driver.click(section);
     }
 
 
     public void checkLetterCreated() {
         try {
-            WebElement template = webDriver.findElementByXpath(String.format(letterXpath, randomBodyText));
+            WebElement template = driver.findElementByXpath(String.format(letterXpath, randomBodyText));
 
         } catch (StaleElementReferenceException e) {
             System.out.println("Element does not exist anymore");
@@ -42,14 +42,14 @@ public class MailPage extends BasicPage {
 
 
     public void openTemplate() {
-        WebElement template = webDriver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
+        WebElement template = driver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
                 randomBodyText));
-        webDriver.click(template);
+        driver.click(template);
     }
 
 
     public void checkTemplateDeleted() {
-        List<WebElement> listOfTemplates = webDriver.findElementListByXpath(allTemplatesXpath);
+        List<WebElement> listOfTemplates = driver.findElementListByXpath(allTemplatesXpath);
         for (WebElement template : listOfTemplates) {
             String actualLetterText = template.getText();
             Assert.assertTrue(!actualLetterText.contains(randomBodyText));
