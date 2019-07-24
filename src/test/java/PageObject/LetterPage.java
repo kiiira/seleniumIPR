@@ -1,12 +1,12 @@
 package PageObject;
 
-import Config.Utilities.HelpfulShizzle;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import static Config.Utilities.HelpfulShizzle.wordGenerator;
+import static Config.Stuff.HelpfulShizzle.wordGenerator;
 
 public class LetterPage extends BasicPage {
+
 
     public static String randomBodyText = null;
 
@@ -21,52 +21,52 @@ public class LetterPage extends BasicPage {
 
 
     public void fillTextAreaElementWithValue(String fieldName, String value) {
-        WebElement textAreaElement = webDriver.findElementByXpath(String.format(textAreaFieldXpath, fieldName));
-        webDriver.input(textAreaElement, value);
+        WebElement textAreaElement = driver.findElementByXpath(String.format(textAreaFieldXpath, fieldName));
+        driver.input(textAreaElement, value);
     }
 
 
     public void fillInputElementWithRandomValue(String fieldName) {
-        WebElement inputElement = webDriver.findElementByXpath(String.format(inputFieldXpath, fieldName));
+        WebElement inputElement = driver.findElementByXpath(String.format(inputFieldXpath, fieldName));
         randomBodyText = wordGenerator();
-        webDriver.input(inputElement, randomBodyText);
+        driver.input(inputElement, randomBodyText);
     }
 
 
     public void fillDivTextFieldWithValue(String fieldName, String value) {
-        WebElement divTextFieldElement = webDriver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
-        webDriver.input(divTextFieldElement, value);
+        WebElement divTextFieldElement = driver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
+        driver.input(divTextFieldElement, value);
     }
 
 
     public void pressTitleBarButton(String buttonText) {
-        WebElement titleBarButton = webDriver.findElementByXpath(String.format(titleBarButtonXpath, buttonText));
-        webDriver.click(titleBarButton);
+        WebElement titleBarButton = driver.findElementByXpath(String.format(titleBarButtonXpath, buttonText));
+        driver.click(titleBarButton);
     }
 
 
     public void checkAddressee(String expectedAddressee) {
-        WebElement addressee = webDriver.findElementByXpath(checkAddresseeXpath);
+        WebElement addressee = driver.findElementByXpath(checkAddresseeXpath);
         Assert.assertEquals(addressee.getText(), expectedAddressee);
     }
 
 
     public void checkSubjectBox() {
-        WebElement subjectBox = webDriver.findElementByXpath(checkSubjectBoxXpath);
+        WebElement subjectBox = driver.findElementByXpath(checkSubjectBoxXpath);
         Assert.assertEquals(subjectBox.getAttribute("value"), randomBodyText);
     }
 
 
     public void checkLetterBody(String expectedLetterBody){
-        WebElement letterBody = webDriver.findElementByXpath(checkLetterBodyXpath);
+        WebElement letterBody = driver.findElementByXpath(checkLetterBodyXpath);
         Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }
 
 
     public void clickButtonInLetterWindow(String buttonLabel) {
-        WebElement letterWindowButton = webDriver.findElementByXpath(String.format(letterWindowButtonXpath,
+        WebElement letterWindowButton = driver.findElementByXpath(String.format(letterWindowButtonXpath,
                 buttonLabel));
-        webDriver.click(letterWindowButton);
+        driver.click(letterWindowButton);
     }
 
 }

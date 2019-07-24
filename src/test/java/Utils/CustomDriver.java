@@ -1,4 +1,4 @@
-package Config.Utilities;
+package Utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,53 +12,59 @@ import java.util.concurrent.TimeUnit;
 /**
  * ChromeDriver set up:
  */
-public class WebDriver {
+public class CustomDriver {
 
 
     /*
     Chrome driver && Explicit wait instances
      */
-    ChromeDriver driver;
+    WebDriver driver;
     WebDriverWait wait;
 
 
     /**
-     * Singleton pattern to create WebDriver setup instance
+     * Singleton pattern to create CustomDriver setup instance
      */
-    public static WebDriver webDriver;
+    public static CustomDriver customDriver;
 
-    public static WebDriver getInstance() {
-        if (webDriver == null) {
-            webDriver = new WebDriver();
+    public static CustomDriver getInstance() {
+        if (customDriver == null) {
+            customDriver = new CustomDriver();
         }
-        return webDriver;
+        return customDriver;
 
+    }
+
+
+    /**
+     * Selenium "get" method wrapper
+     *
+     * @param url to navigate
+     */
+    public void get(String url) {
+        driver.get(url);
     }
 
 
     /**
      * Class constructor
      */
-    private WebDriver() {
+    private CustomDriver() {
         ChromeOptions options = new ChromeOptions();
         ChromeDriver driver = new ChromeDriver(options);
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
+
+        options.addArguments("start-maximized");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.setPageLoadStrategy(PageLoadStrategy.NONE);
+
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        options.addArguments("start-maximized");
-        options.addArguments("enable-automation");
-//        options.addArguments("--headless");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-features=NetworkServiceInProcess");
-
-        // to handle timeout receiving message from render
-        options.setPageLoadStrategy(PageLoadStrategy.NONE);
     }
-
 
     /**
      * Selenium findElement(By.xpath()) wrapper
@@ -127,22 +133,11 @@ public class WebDriver {
 
 
     /**
-     * Selenium "get" method wrapper
-     *
-     * @param url to navigate
-     */
-    public void get(String url) {
-        driver.get(url);
-    }
-
-
-    /**
      * Selenium "click" wrapper
      *
      * @param element web element
      */
     public void click(WebElement element) {
-        element = wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 

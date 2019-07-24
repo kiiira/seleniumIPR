@@ -1,4 +1,4 @@
-package Config.Utilities;
+package Config.Stuff;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.listener.StepLifecycleListener;
@@ -9,13 +9,13 @@ import org.openqa.selenium.TakesScreenshot;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static Config.Utilities.WebDriver.webDriver;
+import static Utils.CustomDriver.customDriver;
 
 public class AllureStepListener implements StepLifecycleListener {
 
     @Override
     public void afterStepUpdate(StepResult result) {
-        byte[] screenShot = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.BYTES);
+        byte[] screenShot = ((TakesScreenshot)customDriver).getScreenshotAs(OutputType.BYTES);
         Allure.getLifecycle().addAttachment(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy_hh:mm:ss")), "image/png", "png", screenShot);
     }
 }
