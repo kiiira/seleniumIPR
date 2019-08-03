@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- date stamp + logger method + shortened class name ({1}) -->
+            <PatternLayout pattern="%d{dd MMM yyyy HH:mm:ss} [%t] %-5p %c{1} %x - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

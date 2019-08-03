@@ -10,7 +10,6 @@ public class MainPage extends BasicPage {
 
     public void clickAccountButton(){
         driver.findElementByXpath(identifierIconXpath).click();
-
     }
 
 

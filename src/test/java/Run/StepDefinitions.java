@@ -18,7 +18,6 @@ public class StepDefinitions {
     private LetterPage letterPage = new LetterPage();
     private BasicPage basicPage = new MainPage();
 
-    //TODO: fix updated logger
     private static final Logger LOG = LogManager.getLogger(StepDefinitions.class);
 
     private String testHost = "https://www.google.com/gmail/";
@@ -28,7 +27,7 @@ public class StepDefinitions {
     @Given("test host open")
     public void openHost() {
         basicPage.navigate(this.testHost);
-        LOG.info("Test host opened");
+        LOG.debug("Test host opened");
     }
 
 
