@@ -3,6 +3,7 @@ package Utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,14 +19,14 @@ public class CustomDriver {
     /*
     Chrome driver && Explicit wait instances
      */
-    WebDriver driver;
-    WebDriverWait wait;
+    private RemoteWebDriver driver;
+    private WebDriverWait wait;
 
 
     /**
      * Singleton pattern to create CustomDriver setup instance
      */
-    public static CustomDriver customDriver;
+    private static CustomDriver customDriver;
 
     public static CustomDriver getInstance() {
         if (customDriver == null) {
@@ -170,6 +171,11 @@ public class CustomDriver {
     public void close() {
         driver.close();
         driver.quit();
+    }
+
+
+    public static byte[] getScreenshot() {
+        return (((TakesScreenshot) customDriver).getScreenshotAs(OutputType.BYTES));
     }
 
 }

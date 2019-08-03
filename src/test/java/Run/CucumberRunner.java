@@ -5,8 +5,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static Utils.CustomDriver.customDriver;
-
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
@@ -23,7 +21,6 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
     @AfterSuite
     public void tearDown() {
-        customDriver.close();
     }
 
 }
