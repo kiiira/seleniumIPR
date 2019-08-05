@@ -51,7 +51,7 @@ public class CustomFirefoxDriver extends BasicDriver {
         FirefoxDriver driver = new FirefoxDriver(options);
         this.firefoxDriver = driver;
         wait = new WebDriverWait(driver, 10);
-        System.setProperty("webdriver.gecko.remoteWebDriver", "bin/geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "bin/geckodriver.exe");
 
         options.addArguments("start-maximized");
         options.addArguments("enable-automation");
@@ -64,12 +64,11 @@ public class CustomFirefoxDriver extends BasicDriver {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(BROWSER_NAME, BrowserType.FIREFOX);
-        capabilities.setBrowserName("firefox");
 
         try {
             remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
         } catch (MalformedURLException e) {
-
+            e.printStackTrace();
         }
     }
 

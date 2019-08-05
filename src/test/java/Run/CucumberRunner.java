@@ -32,8 +32,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             DesiredCapabilities caps = new DesiredCapabilities();
             firefoxOptions.merge(caps);
-            CustomChromeDriver driver = CustomChromeDriver.getInstance();
-//            CustomFirefoxDriver driver = new CustomFirefoxDriver.getInstance();
+            CustomFirefoxDriver driver = CustomFirefoxDriver.getInstance();
         }
 
         LOG.info("SetUp " + browserName + " browser.");

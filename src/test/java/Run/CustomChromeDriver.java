@@ -32,7 +32,7 @@ public class CustomChromeDriver extends BasicDriver {
         ChromeDriver driver = new ChromeDriver(options);
         this.chromeDriver = driver;
         wait = new WebDriverWait(driver, 10);
-        System.setProperty("webdriver.chrome.remoteWebDriver", "bin/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
 
         options.addArguments("start-maximized");
         options.addArguments("enable-automation");
