@@ -98,7 +98,7 @@ public class StepDefinitions {
     @And("^the letter has been created$")
     public void checkLetterCreated() {
         mailPage.checkLetterCreated();
-        LOG.info("Congratulation! The letter has been created");
+        LOG.info("Congratulations! The letter has been created");
     }
 
 

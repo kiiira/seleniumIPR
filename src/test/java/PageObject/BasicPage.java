@@ -1,6 +1,6 @@
 package PageObject;
 
-import Utils.CustomDriver;
+import Run.BasicDriver;
 
 public abstract class BasicPage {
 
@@ -8,7 +8,7 @@ public abstract class BasicPage {
     /**
      * Driver instantiation
      */
-    CustomDriver driver = CustomDriver.getInstance();
+    BasicDriver driver = BasicDriver.getInstance();
 
 
     /**
