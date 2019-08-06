@@ -17,22 +17,26 @@ public class MailPage extends BasicPage {
     private String allTemplatesXpath = "//tr[@aria-labelledby]//div[@role='link']//span[text()='This is a very small letter']" +
             "/parent::span/parent::div/following-sibling::span[contains(text(), '')]";
 
+    public MailPage(String browserName) {
+        super(browserName);
+    }
+
 
     public void clickDivButton(String buttonText) {
-        WebElement divButton = driver.findElementByXpath(String.format(divButtonXpath, buttonText));
-        driver.click(divButton);
+        WebElement divButton = basicDriver.findElementByXpath(String.format(divButtonXpath, buttonText));
+        basicDriver.click(divButton);
     }
 
 
     public void openFolder(String folderLabel) {
-        WebElement section = driver.findElementByXpath(String.format(folderXpath, folderLabel));
-        driver.click(section);
+        WebElement section = basicDriver.findElementByXpath(String.format(folderXpath, folderLabel));
+        basicDriver.click(section);
     }
 
 
     public void checkLetterCreated() {
         try {
-            WebElement template = driver.findElementByXpath(String.format(letterXpath, randomBodyText));
+            WebElement template = basicDriver.findElementByXpath(String.format(letterXpath, randomBodyText));
 
         } catch (StaleElementReferenceException e) {
             System.out.println("Element does not exist anymore");
@@ -42,14 +46,14 @@ public class MailPage extends BasicPage {
 
 
     public void openTemplate() {
-        WebElement template = driver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
+        WebElement template = basicDriver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
                 randomBodyText));
-        driver.click(template);
+        basicDriver.click(template);
     }
 
 
     public void checkTemplateDeleted() {
-        List<WebElement> listOfTemplates = driver.findElementListByXpath(allTemplatesXpath);
+        List<WebElement> listOfTemplates = basicDriver.findElementListByXpath(allTemplatesXpath);
         for (WebElement template : listOfTemplates) {
             String actualLetterText = template.getText();
             Assert.assertTrue(!actualLetterText.contains(randomBodyText));

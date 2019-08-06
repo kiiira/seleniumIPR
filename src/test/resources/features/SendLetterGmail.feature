@@ -1,6 +1,5 @@
 Feature: MainPage
 
-  @Gmail
   Scenario: 01 - Main page operations
 
     Given test host open

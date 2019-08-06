@@ -14,21 +14,8 @@ public class BasicDriver {
     /**
      * Chrome remoteWebDriver && Explicit wait instances
      */
-    protected RemoteWebDriver remoteWebDriver;
+    protected static RemoteWebDriver remoteWebDriver;
     protected WebDriverWait wait;
-
-
-    /**
-     * Singleton pattern to create BasicDriver setup instance
-     */
-    private static BasicDriver basicDriver;
-
-    public static BasicDriver getInstance() {
-        if (basicDriver == null) {
-            basicDriver = new BasicDriver();
-        }
-        return basicDriver;
-    }
 
 
     /**
@@ -152,7 +139,7 @@ public class BasicDriver {
      * @return screenshot image in Bytes
      */
     public static byte[] getScreenshot() {
-        return (((TakesScreenshot) basicDriver).getScreenshotAs(OutputType.BYTES));
+        return (((TakesScreenshot) remoteWebDriver).getScreenshotAs(OutputType.BYTES));
     }
 
 }

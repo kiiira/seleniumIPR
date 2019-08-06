@@ -1,23 +1,39 @@
 package PageObject;
 
 import Run.BasicDriver;
+import Run.CustomChromeDriver;
+import Run.CustomFirefoxDriver;
+import Run.StepDefinitions;
+
 
 public abstract class BasicPage {
 
 
-    /**
-     * Driver instantiation
-     */
-    BasicDriver driver = BasicDriver.getInstance();
+    public BasicDriver basicDriver;
 
 
     /**
-     * Selenium "get" method wrapper
+     * Using driver instance depending on parameter called in BeforeTest
      *
-     * @param url to navigate
+     * @param browserName browser to instantiate
      */
+    public BasicPage(String browserName) {
+        if (browserName.equalsIgnoreCase(StepDefinitions.getBrowser())) {
+            CustomChromeDriver basicDriver = CustomChromeDriver.getInstance();
+
+        } else if (browserName.equalsIgnoreCase(StepDefinitions.getBrowser())) {
+            CustomFirefoxDriver basicDriver = CustomFirefoxDriver.getInstance();
+        }
+    }
+
+
     public void navigate(String url) {
-        driver.get(url);
+        basicDriver.get(url);
+    }
+
+
+    public void shutDown(){
+        basicDriver.close();
     }
 
 

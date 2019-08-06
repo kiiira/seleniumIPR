@@ -1,7 +1,6 @@
 package Run;
 
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,20 +16,22 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 public class CustomFirefoxDriver extends BasicDriver {
 
 
+    /**
+     * Selenium hub URL
+     */
     private String HUB = "http://192.168.2.105:4444/wd/hub";
 
 
     /**
-     * Driver & explicit wait instances.
+     * Explicit wait instance.
      */
-    private FirefoxDriver firefoxDriver;
     private WebDriverWait wait;
 
 
     /**
-     * Singleton pattern to create BasicDriver setup instance.
+     * Singleton pattern to create CustomFirefoxDriver setup instance.
      *
-     * @return remoteWebDriver instance if it doesn't exist.
+     * @return CustomFirefoxDriver instance if it doesn't exist.
      */
     private static CustomFirefoxDriver gecko;
 
@@ -48,9 +49,8 @@ public class CustomFirefoxDriver extends BasicDriver {
      */
     private CustomFirefoxDriver() {
         FirefoxOptions options = new FirefoxOptions();
-        FirefoxDriver driver = new FirefoxDriver(options);
-        this.firefoxDriver = driver;
-        wait = new WebDriverWait(driver, 10);
+
+        wait = new WebDriverWait(remoteWebDriver, 10);
         System.setProperty("webdriver.gecko.driver", "bin/geckodriver.exe");
 
         options.addArguments("start-maximized");
@@ -58,9 +58,9 @@ public class CustomFirefoxDriver extends BasicDriver {
         options.addArguments("--disable-infobars");
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
 
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        remoteWebDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().window().maximize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(BROWSER_NAME, BrowserType.FIREFOX);

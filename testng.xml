@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="seleniumIPR" verbose="1" thread-count="2">
-    <test name="ChromeTest" verbose="1" parallel="true">
+<suite name="seleniumIPR" verbose="2" thread-count="2">
+    <test name="ChromeTest" parallel="true">
         <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="Run.CucumberRunner"/>
         </classes>
     </test>
-    <test name="FirefoxTest" verbose="1" parallel="true">
+    <test name="FirefoxTest" parallel="true">
         <parameter name="browserName" value="firefox"/>
         <classes>
             <class name="Run.CucumberRunner"/>

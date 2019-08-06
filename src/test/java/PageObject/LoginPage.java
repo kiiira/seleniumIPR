@@ -4,26 +4,32 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasicPage {
 
+
     private String nextButtonXpath = "//span[contains(text(), '%s')]";
     private String emailCss = "#identifierId";
     private String passCss = "#password input";
 
 
+    public LoginPage(String browserName) {
+        super(browserName);
+    }
+
+
     public void pressButton(String fieldName) {
-        WebElement section = driver.findElementByXpath(String.format(nextButtonXpath, fieldName));
-        driver.click(section);
+        WebElement section = basicDriver.findElementByXpath(String.format(nextButtonXpath, fieldName));
+        basicDriver.click(section);
     }
 
 
     public void fillEmailFieldWithValue(String value){
-        WebElement emailInputField = driver.findElementByCssSelector(emailCss);
-        driver.input(emailInputField, value);
+        WebElement emailInputField = basicDriver.findElementByCssSelector(emailCss);
+        basicDriver.input(emailInputField, value);
     }
 
 
     public void fillPasswordFieldWithValue(String value){
-        WebElement passInputField = driver.findElementByCssSelector(passCss);
-        driver.input(passInputField, value);
+        WebElement passInputField = basicDriver.findElementByCssSelector(passCss);
+        basicDriver.input(passInputField, value);
     }
 
 }

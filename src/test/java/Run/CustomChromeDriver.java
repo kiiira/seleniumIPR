@@ -1,7 +1,6 @@
 package Run;
 
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,12 +12,27 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomChromeDriver extends BasicDriver {
 
+    /**
+     * Selenium hub URL
+     */
     private String HUB = "http://192.168.2.105:4444/wd/hub";
 
-    private ChromeDriver chromeDriver;
+
+    /**
+     * Explicit wait instance.
+     */
     private WebDriverWait wait;
 
+
+    /**
+     * Singleton pattern to create CustomChromeDriver setup instance.
+     *
+     * @return CustomChromeDriver instance if it doesn't exist.
+     */
+
+
     private static CustomChromeDriver chrome;
+
 
     public static CustomChromeDriver getInstance() {
         if (chrome == null) {
@@ -27,11 +41,14 @@ public class CustomChromeDriver extends BasicDriver {
         return chrome;
     }
 
+
+    /**
+     * Class set up constructor.
+     */
     private CustomChromeDriver() {
         ChromeOptions options = new ChromeOptions();
-        ChromeDriver driver = new ChromeDriver(options);
-        this.chromeDriver = driver;
-        wait = new WebDriverWait(driver, 10);
+
+        wait = new WebDriverWait(remoteWebDriver, 10);
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
 
         options.addArguments("start-maximized");
@@ -39,9 +56,9 @@ public class CustomChromeDriver extends BasicDriver {
         options.addArguments("--disable-infobars");
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
 
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        remoteWebDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().window().maximize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");

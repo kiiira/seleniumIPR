@@ -12,11 +12,22 @@ import static PageObject.LetterPage.randomBodyText;
 
 public class StepDefinitions {
 
-    private LoginPage loginPage = new LoginPage();
-    private MainPage mainPage = new MainPage();
-    private MailPage mailPage = new MailPage();
-    private LetterPage letterPage = new LetterPage();
-    private BasicPage basicPage = new MainPage();
+
+    public static String getBrowser() {
+        return browser.get();
+    }
+
+    public static void setBrowser(String browser) {
+        StepDefinitions.browser.set(browser);
+    }
+
+    static ThreadLocal<String> browser = new ThreadLocal<String>();
+
+    private LoginPage loginPage = new LoginPage(browser.get());
+    private MainPage mainPage = new MainPage(browser.get());
+    private MailPage mailPage = new MailPage(browser.get());
+    private LetterPage letterPage = new LetterPage(browser.get());
+    private BasicPage basicPage = new MainPage(browser.get());
 
     private static final Logger LOG = LogManager.getLogger(StepDefinitions.class);
 
@@ -154,6 +165,7 @@ public class StepDefinitions {
     @And("^press \"([^\"]*)\" button in account popup$")
     public void pressButtonInAccountPopup(String buttonLabel) {
         mainPage.clickAccountActionButton(buttonLabel);
+        basicPage.shutDown();
         LOG.info(String.format("Pressing \"%s\" button in account popup", buttonLabel));
     }
 }

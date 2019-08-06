@@ -19,54 +19,58 @@ public class LetterPage extends BasicPage {
     private String checkLetterBodyXpath = "//div[@role='textbox']";
     private String letterWindowButtonXpath = "//div[@role = 'button' and contains(@aria-label, '%s')]";
 
+    public LetterPage(String browserName) {
+        super(browserName);
+    }
+
 
     public void fillTextAreaElementWithValue(String fieldName, String value) {
-        WebElement textAreaElement = driver.findElementByXpath(String.format(textAreaFieldXpath, fieldName));
-        driver.input(textAreaElement, value);
+        WebElement textAreaElement = basicDriver.findElementByXpath(String.format(textAreaFieldXpath, fieldName));
+        basicDriver.input(textAreaElement, value);
     }
 
 
     public void fillInputElementWithRandomValue(String fieldName) {
-        WebElement inputElement = driver.findElementByXpath(String.format(inputFieldXpath, fieldName));
+        WebElement inputElement = basicDriver.findElementByXpath(String.format(inputFieldXpath, fieldName));
         randomBodyText = wordGenerator();
-        driver.input(inputElement, randomBodyText);
+        basicDriver.input(inputElement, randomBodyText);
     }
 
 
     public void fillDivTextFieldWithValue(String fieldName, String value) {
-        WebElement divTextFieldElement = driver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
-        driver.input(divTextFieldElement, value);
+        WebElement divTextFieldElement = basicDriver.findElementByXpath(String.format(divTextFieldXpath, fieldName));
+        basicDriver.input(divTextFieldElement, value);
     }
 
 
     public void pressTitleBarButton(String buttonText) {
-        WebElement titleBarButton = driver.findElementByXpath(String.format(titleBarButtonXpath, buttonText));
-        driver.click(titleBarButton);
+        WebElement titleBarButton = basicDriver.findElementByXpath(String.format(titleBarButtonXpath, buttonText));
+        basicDriver.click(titleBarButton);
     }
 
 
     public void checkAddressee(String expectedAddressee) {
-        WebElement addressee = driver.findElementByXpath(checkAddresseeXpath);
+        WebElement addressee = basicDriver.findElementByXpath(checkAddresseeXpath);
         Assert.assertEquals(addressee.getText(), expectedAddressee);
     }
 
 
     public void checkSubjectBox() {
-        WebElement subjectBox = driver.findElementByXpath(checkSubjectBoxXpath);
+        WebElement subjectBox = basicDriver.findElementByXpath(checkSubjectBoxXpath);
         Assert.assertEquals(subjectBox.getAttribute("value"), randomBodyText);
     }
 
 
     public void checkLetterBody(String expectedLetterBody){
-        WebElement letterBody = driver.findElementByXpath(checkLetterBodyXpath);
+        WebElement letterBody = basicDriver.findElementByXpath(checkLetterBodyXpath);
         Assert.assertEquals(letterBody.getText(), expectedLetterBody);
     }
 
 
     public void clickButtonInLetterWindow(String buttonLabel) {
-        WebElement letterWindowButton = driver.findElementByXpath(String.format(letterWindowButtonXpath,
+        WebElement letterWindowButton = basicDriver.findElementByXpath(String.format(letterWindowButtonXpath,
                 buttonLabel));
-        driver.click(letterWindowButton);
+        basicDriver.click(letterWindowButton);
     }
 
 }
