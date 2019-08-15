@@ -7,10 +7,6 @@ public class MainPage extends BasicPage {
     private String identifierIconXpath = "//a[contains(@aria-label, 'Аккаунт Google')]";
     private String accountActionButtonXpath = "//a[contains(text(), 'Выйти')]";
 
-    public MainPage(String browserName) {
-        super(browserName);
-    }
-
 
     public void clickAccountButton(){
         basicDriver.findElementByXpath(identifierIconXpath).click();

@@ -9,12 +9,6 @@ public class LoginPage extends BasicPage {
     private String emailCss = "#identifierId";
     private String passCss = "#password input";
 
-
-    public LoginPage(String browserName) {
-        super(browserName);
-    }
-
-
     public void pressButton(String fieldName) {
         WebElement section = basicDriver.findElementByXpath(String.format(nextButtonXpath, fieldName));
         basicDriver.click(section);

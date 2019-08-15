@@ -21,8 +21,6 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
     @BeforeTest()
     public void setUp(String browserName) {
 
-            StepDefinitions.setBrowser(browserName);
-
         LOG.info("Set up " + browserName + " browser.");
         LOG.info("Thread id is " + Thread.currentThread().getId());
     }

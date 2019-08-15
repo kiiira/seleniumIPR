@@ -17,11 +17,6 @@ public class MailPage extends BasicPage {
     private String allTemplatesXpath = "//tr[@aria-labelledby]//div[@role='link']//span[text()='This is a very small letter']" +
             "/parent::span/parent::div/following-sibling::span[contains(text(), '')]";
 
-    public MailPage(String browserName) {
-        super(browserName);
-    }
-
-
     public void clickDivButton(String buttonText) {
         WebElement divButton = basicDriver.findElementByXpath(String.format(divButtonXpath, buttonText));
         basicDriver.click(divButton);

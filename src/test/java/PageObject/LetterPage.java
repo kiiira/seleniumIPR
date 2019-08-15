@@ -19,10 +19,6 @@ public class LetterPage extends BasicPage {
     private String checkLetterBodyXpath = "//div[@role='textbox']";
     private String letterWindowButtonXpath = "//div[@role = 'button' and contains(@aria-label, '%s')]";
 
-    public LetterPage(String browserName) {
-        super(browserName);
-    }
-
 
     public void fillTextAreaElementWithValue(String fieldName, String value) {
         WebElement textAreaElement = basicDriver.findElementByXpath(String.format(textAreaFieldXpath, fieldName));
