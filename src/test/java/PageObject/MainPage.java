@@ -9,12 +9,12 @@ public class MainPage extends BasicPage {
 
 
     public void clickAccountButton(){
-        basicDriver.findElementByXpath(identifierIconXpath).click();
+        basicDriver.get().findElementByXpath(identifierIconXpath).click();
     }
 
 
     public void clickAccountActionButton(String buttonLabel){
-        basicDriver.findElementByXpath(accountActionButtonXpath).click();
+        basicDriver.get().findElementByXpath(accountActionButtonXpath).click();
     }
 
 }

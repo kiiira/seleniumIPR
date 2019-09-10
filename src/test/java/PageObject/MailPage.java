@@ -10,6 +10,7 @@ import static PageObject.LetterPage.randomBodyText;
 
 public class MailPage extends BasicPage {
 
+
     private String divButtonXpath = "//div[@role='button' and text()='%s']";
     private String folderXpath = "//a[@title='%s']";
     private String letterXpath = "//div[@role='main']//tr[@draggable='true']//div[@role='link']" +
@@ -17,21 +18,22 @@ public class MailPage extends BasicPage {
     private String allTemplatesXpath = "//tr[@aria-labelledby]//div[@role='link']//span[text()='This is a very small letter']" +
             "/parent::span/parent::div/following-sibling::span[contains(text(), '')]";
 
+
     public void clickDivButton(String buttonText) {
-        WebElement divButton = basicDriver.findElementByXpath(String.format(divButtonXpath, buttonText));
-        basicDriver.click(divButton);
+        WebElement divButton = basicDriver.get().findElementByXpath(String.format(divButtonXpath, buttonText));
+        basicDriver.get().click(divButton);
     }
 
 
     public void openFolder(String folderLabel) {
-        WebElement section = basicDriver.findElementByXpath(String.format(folderXpath, folderLabel));
-        basicDriver.click(section);
+        WebElement section = basicDriver.get().findElementByXpath(String.format(folderXpath, folderLabel));
+        basicDriver.get().click(section);
     }
 
 
     public void checkLetterCreated() {
         try {
-            WebElement template = basicDriver.findElementByXpath(String.format(letterXpath, randomBodyText));
+            WebElement template = basicDriver.get().findElementByXpath(String.format(letterXpath, randomBodyText));
 
         } catch (StaleElementReferenceException e) {
             System.out.println("Element does not exist anymore");
@@ -41,17 +43,17 @@ public class MailPage extends BasicPage {
 
 
     public void openTemplate() {
-        WebElement template = basicDriver.findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
+        WebElement template = basicDriver.get().findElementByXpath(String.format(letterXpath + "/ancestor::div[@role='link']",
                 randomBodyText));
-        basicDriver.click(template);
+        basicDriver.get().click(template);
     }
 
 
     public void checkTemplateDeleted() {
-        List<WebElement> listOfTemplates = basicDriver.findElementListByXpath(allTemplatesXpath);
+        List<WebElement> listOfTemplates = basicDriver.get().findElementListByXpath(allTemplatesXpath);
         for (WebElement template : listOfTemplates) {
             String actualLetterText = template.getText();
-            Assert.assertTrue(!actualLetterText.contains(randomBodyText));
+            Assert.assertFalse(actualLetterText.contains(randomBodyText));
         }
     }
 

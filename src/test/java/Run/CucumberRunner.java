@@ -2,10 +2,12 @@ package Run;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+
+import static PageObject.BasicPage.setUp;
+import static PageObject.BasicPage.shutDown;
 
 
 @CucumberOptions(
@@ -15,13 +17,15 @@ import org.testng.annotations.Parameters;
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 
-    private static final Logger LOG = LogManager.getLogger(CucumberRunner.class);
-
     @Parameters({"browserName"})
     @BeforeTest()
-    public void setUp(String browserName) {
-
-        LOG.info("Set up " + browserName + " browser.");
-        LOG.info("Thread id is " + Thread.currentThread().getId());
+    public void setUpCall(String browserName) {
+        setUp(browserName);
     }
+
+    @AfterTest(alwaysRun = true)
+    public void closeAndQuit() {
+        shutDown();
+    }
+
 }

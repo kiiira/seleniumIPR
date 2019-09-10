@@ -1,6 +1,7 @@
 package Run;
 
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -19,13 +20,7 @@ public class CustomFirefoxDriver extends BasicDriver {
     /**
      * Selenium hub URL
      */
-    private String HUB = "http://192.168.2.105:4444/wd/hub";
-
-
-    /**
-     * Explicit wait instance.
-     */
-    private WebDriverWait wait;
+    private String HUB = "http://localhost:4444/wd/hub";
 
 
     /**
@@ -48,28 +43,30 @@ public class CustomFirefoxDriver extends BasicDriver {
      * Class set up constructor.
      */
     private CustomFirefoxDriver() {
-        FirefoxOptions options = new FirefoxOptions();
 
-        wait = new WebDriverWait(remoteWebDriver, 10);
         System.setProperty("webdriver.gecko.driver", "bin/geckodriver.exe");
 
-        options.addArguments("start-maximized");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.setPageLoadStrategy(PageLoadStrategy.NONE);
-
-        remoteWebDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        remoteWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        remoteWebDriver.manage().window().maximize();
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(BROWSER_NAME, BrowserType.FIREFOX);
+        capabilities.setPlatform(Platform.WINDOWS);
+        capabilities.setBrowserName("firefox");
+
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+        capabilities.merge(options);
 
         try {
             remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+
+        wait = new WebDriverWait(remoteWebDriver, 10);
+
+        remoteWebDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        remoteWebDriver.manage().window().maximize();
+
     }
 
 }

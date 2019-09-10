@@ -1,6 +1,7 @@
 package Run;
 
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -15,13 +16,7 @@ public class CustomChromeDriver extends BasicDriver {
     /**
      * Selenium hub URL
      */
-    private String HUB = "http://192.168.2.105:4444/wd/hub";
-
-
-    /**
-     * Explicit wait instance.
-     */
-    private WebDriverWait wait;
+    private String HUB = "http://localhost:4444/wd/hub";
 
 
     /**
@@ -29,8 +24,6 @@ public class CustomChromeDriver extends BasicDriver {
      *
      * @return CustomChromeDriver instance if it doesn't exist.
      */
-
-
     private static CustomChromeDriver chrome;
 
 
@@ -46,12 +39,24 @@ public class CustomChromeDriver extends BasicDriver {
      * Class set up constructor.
      */
     private CustomChromeDriver() {
+
+
+        System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setPlatform(Platform.WINDOWS);
+
+        try {
+            remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
+        } catch (MalformedURLException e) {
+            System.err.println("ERROR");
+        }
+
         ChromeOptions options = new ChromeOptions();
 
         wait = new WebDriverWait(remoteWebDriver, 10);
-        System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
 
-        options.addArguments("start-maximized");
         options.addArguments("enable-automation");
         options.addArguments("--disable-infobars");
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
@@ -60,15 +65,6 @@ public class CustomChromeDriver extends BasicDriver {
         remoteWebDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         remoteWebDriver.manage().window().maximize();
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-
-        try {
-            remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
-        } catch (MalformedURLException e) {
-
-        }
     }
-
 
 }
