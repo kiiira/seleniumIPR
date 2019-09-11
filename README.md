@@ -21,7 +21,7 @@ This starts a hub using default parameter values
 
 check it: http://localhost:4444/grid/console
 
-OPEN ANOTHER COMMAND PROMT
+OPEN ANOTHER COMMAND PROMPT and set up two nodes
 ```
 java -jar "C:/path/to/jar" -role node -hub http://localhost:4444/grid/register
 ```
