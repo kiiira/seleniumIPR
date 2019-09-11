@@ -2,10 +2,12 @@ package PageObject;
 
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
+
 public class LoginPage extends BasicPage {
 
 
-    private String nextButtonXpath = "//span[contains(text(), '%s')]";
+    private String nextButtonXpath = "//span[text()='Далее']";
     private String emailCss = "#identifierId";
     private String passCss = "#password input";
 
@@ -16,15 +18,15 @@ public class LoginPage extends BasicPage {
     }
 
 
-    public void fillEmailFieldWithValue(String value) {
+    public void fillEmailFieldWithValue() throws IOException {
         WebElement emailInputField = basicDriver.get().findElementByCssSelector(emailCss);
-        basicDriver.get().input(emailInputField, value);
+        basicDriver.get().input(emailInputField, readLoginProperties("login"));
     }
 
 
-    public void fillPasswordFieldWithValue(String value) {
+    public void fillPasswordFieldWithValue() throws IOException {
         WebElement passInputField = basicDriver.get().findElementByCssSelector(passCss);
-        basicDriver.get().input(passInputField, value);
+        basicDriver.get().input(passInputField, readLoginProperties("pass"));
     }
 
 }

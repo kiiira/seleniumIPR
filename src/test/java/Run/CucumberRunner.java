@@ -24,7 +24,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
     }
 
     @AfterTest(alwaysRun = true)
-    public void closeAndQuit() {
+    public void quit() {
         shutDown();
     }
 

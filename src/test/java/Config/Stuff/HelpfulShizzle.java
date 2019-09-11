@@ -11,12 +11,12 @@ public class HelpfulShizzle {
         String alphaNumericString = "0123456789"
                 + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "abcdefghijklmnopqrstuvwxyz";
-        StringBuilder stringBuilder = new StringBuilder(6);
+        StringBuffer stringBuffer = new StringBuffer(6);
         for (int i = 0; i < 6; i++){
             int index = (int) (alphaNumericString.length()
                     * Math.random());
-            stringBuilder.append(alphaNumericString.charAt(index));
-        } return stringBuilder.toString();
+            stringBuffer.append(alphaNumericString.charAt(index));
+        } return stringBuffer.toString();
     }
 
 }

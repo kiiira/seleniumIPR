@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 
-public class BasicDriver {
+public abstract class BasicDriver {
 
 
     /**
@@ -125,15 +125,6 @@ public class BasicDriver {
 
 
     /**
-     * Selenium close & quit wrapper
-     */
-    public void close() {
-        remoteWebDriver.close();
-        remoteWebDriver.quit();
-    }
-
-
-    /**
      * Takes screenshot
      *
      * @return screenshot image in Bytes
@@ -142,4 +133,11 @@ public class BasicDriver {
         return (((TakesScreenshot) remoteWebDriver).getScreenshotAs(OutputType.BYTES));
     }
 
+
+    /**
+     * Selenium close & quit wrapper
+     */
+    public void quit(){
+        remoteWebDriver.quit();
+    };
 }

@@ -1,16 +1,16 @@
-Feature: MainPage
+Feature: Sending a GMail letter
 
-  Scenario: 01 - Main page operations
+  Scenario: 01 - Saving letter template and sending
 
-    * test host open
+    * open test host
 
     # login actions
-    * fill e-mail field with value "kerakeera@gmail.com"
+    * fill in e-mail field
     * press "Далее" button
-    * fill password field with value "testytest123"
+    * fill in password field
     * press "Далее" button
 
-    # create a letter
+    # creating a letter
     * click "Написать" div button
     * fill "Кому" addressee field with value "testytest@test.test"
     * fill "Тема" subject field with random value
