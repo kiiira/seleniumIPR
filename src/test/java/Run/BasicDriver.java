@@ -1,40 +1,21 @@
-package Utils;
+package Run;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-/**
- * ChromeDriver set up:
- */
-public class CustomDriver {
 
 
-    /*
-    Chrome driver && Explicit wait instances
-     */
-    private RemoteWebDriver driver;
-    private WebDriverWait wait;
+public abstract class BasicDriver {
 
 
     /**
-     * Singleton pattern to create CustomDriver setup instance
+     * Chrome remoteWebDriver && Explicit wait instances
      */
-    private static CustomDriver customDriver;
-
-    public static CustomDriver getInstance() {
-        if (customDriver == null) {
-            customDriver = new CustomDriver();
-        }
-        return customDriver;
-
-    }
+    protected static RemoteWebDriver remoteWebDriver;
+    protected WebDriverWait wait;
 
 
     /**
@@ -43,29 +24,9 @@ public class CustomDriver {
      * @param url to navigate
      */
     public void get(String url) {
-        driver.get(url);
+        remoteWebDriver.get(url);
     }
 
-
-    /**
-     * Class constructor
-     */
-    private CustomDriver() {
-        ChromeOptions options = new ChromeOptions();
-        ChromeDriver driver = new ChromeDriver(options);
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10);
-        System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
-
-        options.addArguments("start-maximized");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.setPageLoadStrategy(PageLoadStrategy.NONE);
-
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-    }
 
     /**
      * Selenium findElement(By.xpath()) wrapper
@@ -86,7 +47,6 @@ public class CustomDriver {
             }
         }
         return element;
-
     }
 
 
@@ -129,7 +89,6 @@ public class CustomDriver {
             }
         }
         return element;
-
     }
 
 
@@ -149,7 +108,7 @@ public class CustomDriver {
      * @param element web element
      */
     public void scrollTo(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) remoteWebDriver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
 
@@ -166,16 +125,19 @@ public class CustomDriver {
 
 
     /**
+     * Takes screenshot
+     *
+     * @return screenshot image in Bytes
+     */
+    public static byte[] getScreenshot() {
+        return (((TakesScreenshot) remoteWebDriver).getScreenshotAs(OutputType.BYTES));
+    }
+
+
+    /**
      * Selenium close & quit wrapper
      */
-    public void close() {
-        driver.close();
-        driver.quit();
-    }
-
-
-    public static byte[] getScreenshot() {
-        return (((TakesScreenshot) customDriver).getScreenshotAs(OutputType.BYTES));
-    }
-
+    public void quit(){
+        remoteWebDriver.quit();
+    };
 }

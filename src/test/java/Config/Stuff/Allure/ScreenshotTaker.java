@@ -5,7 +5,7 @@ import io.qameta.allure.Allure;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static Utils.CustomDriver.getScreenshot;
+import static Run.BasicDriver.getScreenshot;
 
 public class ScreenshotTaker {
     public static void attachScreenshot() {

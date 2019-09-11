@@ -8,6 +8,8 @@ import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+
 import static PageObject.LetterPage.randomBodyText;
 
 public class StepDefinitions {
@@ -23,26 +25,26 @@ public class StepDefinitions {
     private String testHost = "https://www.google.com/gmail/";
 
 
-    @Step ("Opening test host")
-    @Given("test host open")
+    @Step("Opening test host")
+    @Given("open test host")
     public void openHost() {
         basicPage.navigate(this.testHost);
-        LOG.debug("Test host opened");
+        LOG.info("Test host opened");
     }
 
 
-    @Step("Filling email field with value \"{0}\"")
-    @And("^fill e-mail field with value \"([^\"]*)\"$")
-    public void fillEMailFieldWithValue(String value) {
-        loginPage.fillEmailFieldWithValue(value);
-        LOG.info(String.format("E-mail field filled with value %s", value));
+    @Step("Filling email field")
+    @And("^fill in e-mail field$")
+    public void fillEMailFieldWithValue() throws IOException {
+        loginPage.fillEmailFieldWithValue();
+        LOG.info("E-mail field filled");
     }
 
-    @Step("Filling password field with value \"{0}\"")
-    @And("^fill password field with value \"([^\"]*)\"$")
-    public void fillPasswordFieldWithValue(String value) {
-        loginPage.fillPasswordFieldWithValue(value);
-        LOG.info(String.format("Password field filled with value %s", value));
+    @Step("Filling password field")
+    @And("^fill in password field$")
+    public void fillPasswordFieldWithValue() throws IOException {
+        loginPage.fillPasswordFieldWithValue();
+        LOG.info("Password field filled");
     }
 
 
@@ -98,7 +100,7 @@ public class StepDefinitions {
     @And("^the letter has been created$")
     public void checkLetterCreated() {
         mailPage.checkLetterCreated();
-        LOG.info("Congratulation! The letter has been created");
+        LOG.info("Congratulations! The letter has been created");
     }
 
 
@@ -151,9 +153,4 @@ public class StepDefinitions {
     }
 
 
-    @And("^press \"([^\"]*)\" button in account popup$")
-    public void pressButtonInAccountPopup(String buttonLabel) {
-        mainPage.clickAccountActionButton(buttonLabel);
-        LOG.info(String.format("Pressing \"%s\" button in account popup", buttonLabel));
-    }
 }
