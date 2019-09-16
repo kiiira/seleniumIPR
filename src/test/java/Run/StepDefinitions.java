@@ -1,5 +1,6 @@
 package Run;
 
+import Config.Stuff.Utils;
 import PageObject.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -10,13 +11,14 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static PageObject.LetterPage.randomBodyText;
 
 public class StepDefinitions {
 
     private LoginPage loginPage = new LoginPage();
     private MainPage mainPage = new MainPage();
     private MailPage mailPage = new MailPage();
+    private SentLettersPage sentLettersPage = new SentLettersPage();
+    private TemplatesPage templatesPage = new TemplatesPage();
     private LetterPage letterPage = new LetterPage();
     private BasicPage basicPage = new MainPage();
 
@@ -99,14 +101,14 @@ public class StepDefinitions {
 
     @And("^the letter has been created$")
     public void checkLetterCreated() {
-        mailPage.checkLetterCreated();
+        sentLettersPage.checkLetterCreated();
         LOG.info("Congratulations! The letter has been created");
     }
 
 
-    @And("^open the template$")
+    @And("^open the newly created template$")
     public void openTheTemplate() {
-        mailPage.openTemplate();
+        templatesPage.openTemplate();
         LOG.info("Opening the newly created template");
     }
 
@@ -121,7 +123,7 @@ public class StepDefinitions {
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject() {
         letterPage.checkSubjectBox();
-        LOG.info(String.format("The template has subject field as randomly generated text: \"%s\"", randomBodyText));
+        LOG.info(String.format("The template has subject field as randomly generated text: \"%s\"", Utils.getGeneratedWord()));
     }
 
 
@@ -141,7 +143,7 @@ public class StepDefinitions {
 
     @Then("^the template has been deleted$")
     public void theTemplateHasBeenDeleted() {
-        mailPage.checkTemplateDeleted();
+        templatesPage.checkTemplateDeleted();
         LOG.info("The template has been successfully deleted");
     }
 
@@ -149,6 +151,12 @@ public class StepDefinitions {
     @And("^press account button$")
     public void pressAccountButton() {
         mainPage.clickAccountButton();
+        LOG.info("Pressing account button");
+    }
+
+    @And("^press \"([^\"]*)\" button in account popup$")
+    public void pressAccountActionButton(String buttonName) {
+        mainPage.clickAccountActionButton(buttonName);
         LOG.info("Pressing account button");
     }
 

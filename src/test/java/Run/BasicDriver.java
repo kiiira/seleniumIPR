@@ -1,14 +1,20 @@
 package Run;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.function.Function;
 
 
 public abstract class BasicDriver {
+
+
+    private static final Logger LOG = LogManager.getLogger(BasicDriver.class);
 
 
     /**
@@ -36,14 +42,16 @@ public abstract class BasicDriver {
      */
     public WebElement findElementByXpath(String xpath) {
         WebElement element = null;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
                 element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
                 element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
                 return element;
             } catch (StaleElementReferenceException se) {
-                continue;
+                LOG.error("Element doesn't exist anymore");
+            } catch (RuntimeException e) {
+                LOG.error("Runtime exception");
             }
         }
         return element;
@@ -58,12 +66,14 @@ public abstract class BasicDriver {
      */
     public List<WebElement> findElementListByXpath(String xpath) {
         List<WebElement> listOfElements = null;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 listOfElements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
                 return listOfElements;
             } catch (StaleElementReferenceException se) {
-                continue;
+                LOG.error("Element doesn't exist anymore");
+            } catch (RuntimeException e) {
+                LOG.error("Runtime exception");
             }
         }
         return listOfElements;
@@ -85,7 +95,9 @@ public abstract class BasicDriver {
                 element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
                 return element;
             } catch (StaleElementReferenceException se) {
-                continue;
+                LOG.error("Element doesn't exist anymore");
+            } catch (RuntimeException e) {
+                LOG.error("Runtime exception");
             }
         }
         return element;
@@ -137,7 +149,20 @@ public abstract class BasicDriver {
     /**
      * Selenium close & quit wrapper
      */
-    public void quit(){
+    public void quit() {
         remoteWebDriver.quit();
-    };
+    }
+
+    /**
+     * Page loading timeout (@FluentWait until method analogue)
+     *
+     * @param secondsToWait timeout to wait for an element
+     * @param polling       request polling interval
+     * @param isTrue        boolean conditional parameter
+     * @param <V>           type parameter to return
+     * @return wait instance
+     */
+    public <V> V waitForElementToLoad(int secondsToWait, int polling, Function<? super WebDriver, V> isTrue) {
+        return new WebDriverWait(remoteWebDriver, secondsToWait, polling * 1000).until(isTrue);
+    }
 }

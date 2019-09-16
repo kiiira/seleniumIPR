@@ -53,6 +53,7 @@ public class CustomFirefoxDriver extends BasicDriver {
         try {
             remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
         } catch (MalformedURLException e) {
+            System.err.println("Couldn't reach HUB");
             e.printStackTrace();
         }
 

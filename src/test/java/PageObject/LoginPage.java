@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class LoginPage extends BasicPage {
 
-
     private String nextButtonXpath = "//span[text()='Далее']";
     private String emailCss = "#identifierId";
     private String passCss = "#password input";

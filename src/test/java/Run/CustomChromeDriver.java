@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomChromeDriver extends BasicDriver {
 
+
     /**
      * Selenium hub URL
      */
@@ -50,7 +51,7 @@ public class CustomChromeDriver extends BasicDriver {
         try {
             remoteWebDriver = new RemoteWebDriver(new URL(HUB), capabilities);
         } catch (MalformedURLException e) {
-            System.err.println("ERROR");
+            System.err.println("Couldn't reach HUB");
         }
 
         ChromeOptions options = new ChromeOptions();

@@ -12,16 +12,15 @@ Feature: Sending a GMail letter
 
     # creating a letter
     * click "Написать" div button
-    * fill "Кому" addressee field with value "testytest@test.test"
+    * fill "Кому" addressee field with value "zyubanovakira@gmail.com"
     * fill "Тема" subject field with random value
     * fill "Тело письма" text field with value "This is a very small letter"
     * click "Сохранить и закрыть" button in letter title bar
-    * go to "Черновики" folder
-    * the letter has been created
 
     # send the letter and check if it deleted from templates folder
-    * open the template
-    * the template has addressee field as "testytest@test.test"
+    * go to "Черновики" folder
+    * open the newly created template
+    * the template has addressee field as "zyubanovakira@gmail.com"
     * the template has subject field as randomly generated text
     * the template has body field as "This is a very small letter"
     * press "Отправить" button in letter window
@@ -32,3 +31,4 @@ Feature: Sending a GMail letter
     * go to "Отправленные" folder
     * the letter has been created
     * press account button
+    * press "Выйти" button in account popup
