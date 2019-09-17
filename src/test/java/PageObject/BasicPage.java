@@ -6,10 +6,6 @@ import Run.CustomFirefoxDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-
 public abstract class BasicPage {
 
     private static final Logger LOG = LogManager.getLogger(BasicPage.class);
@@ -36,13 +32,5 @@ public abstract class BasicPage {
     public static void shutDown() {
         basicDriver.get().quit();
     }
-
-    String readLoginProperties(String key) throws IOException {
-        FileReader reader = new FileReader("login.properties");
-        Properties properties = new Properties();
-        properties.load(reader);
-        return properties.getProperty(key);
-    }
-
 
 }

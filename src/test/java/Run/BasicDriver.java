@@ -20,7 +20,7 @@ public abstract class BasicDriver {
     /**
      * Chrome remoteWebDriver && Explicit wait instances
      */
-    protected static RemoteWebDriver remoteWebDriver;
+    protected RemoteWebDriver remoteWebDriver;
     protected WebDriverWait wait;
 
 
@@ -141,7 +141,7 @@ public abstract class BasicDriver {
      *
      * @return screenshot image in Bytes
      */
-    public static byte[] getScreenshot() {
+    public byte[] getScreenshot() {
         return (((TakesScreenshot) remoteWebDriver).getScreenshotAs(OutputType.BYTES));
     }
 

@@ -1,5 +1,9 @@
 package Config;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 public class Utils {
 
 
@@ -29,5 +33,12 @@ public class Utils {
             wordGenerator();
         }
         return generatedWord.get();
+    }
+
+    public static String readLoginProperties(String key) throws IOException {
+        FileReader reader = new FileReader("login.properties");
+        Properties properties = new Properties();
+        properties.load(reader);
+        return properties.getProperty(key);
     }
 }

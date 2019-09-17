@@ -50,7 +50,7 @@ public class StepDefinitions {
     }
 
 
-    @Step("Pressing \"{0}\" button")
+    @Step ("Pressing \"{0}\" button")
     @And("^press \"([^\"]*)\" button$")
     public void pressButton(String buttonLabel) {
         loginPage.pressButton(buttonLabel);
@@ -129,6 +129,7 @@ public class StepDefinitions {
         LOG.info(String.format("The template has expected addressee field \"%s\"", value));
     }
 
+
     @Step("The template has subject field as randomly generated text")
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject() {
@@ -174,5 +175,6 @@ public class StepDefinitions {
         mainPage.clickAccountActionButton(buttonName);
         LOG.info("Pressing account button");
     }
+
 
 }

@@ -16,6 +16,12 @@ import static PageObject.BasicPage.shutDown;
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 
+
+    /**
+     * Browser testNG setup
+     *
+     * @param browserName browser name to pick up from testng.xml
+     */
     @Parameters({"browserName"})
     @BeforeTest()
     public void setUpCall(String browserName) {

@@ -24,11 +24,11 @@ Feature: Sending a GMail letter
     * the template has subject field as randomly generated text
     * the template has body field as "This is a very small letter"
     * press "Отправить" button in letter window
-    * go to "Черновики" folder
-    * the template has been deleted
 
     # check the letter moved to sent folder and log out
     * go to "Отправленные" folder
     * the letter has been created
+    * go to "Черновики" folder
+    * the template has been deleted
     * press account button
     * press "Выйти" button in account popup
