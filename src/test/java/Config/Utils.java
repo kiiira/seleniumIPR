@@ -1,4 +1,4 @@
-package Config.Stuff;
+package Config;
 
 public class Utils {
 
@@ -25,7 +25,7 @@ public class Utils {
     }
 
     public static String getGeneratedWord() {
-        if (generatedWord.get() == null){
+        if (generatedWord.get() == null) {
             wordGenerator();
         }
         return generatedWord.get();

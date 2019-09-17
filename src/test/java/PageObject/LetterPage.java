@@ -3,7 +3,7 @@ package PageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import static Config.Stuff.Utils.*;
+import static Config.Utils.*;
 
 /**
  * Letter popup page.
