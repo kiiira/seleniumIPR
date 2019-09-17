@@ -3,15 +3,12 @@ package PageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import static Config.Stuff.HelpfulShizzle.wordGenerator;
+import static Config.Stuff.Utils.*;
 
 /**
  * Letter popup page.
  */
 public class LetterPage extends BasicPage {
-
-
-    public static String randomBodyText = null;
 
 
     private String textAreaFieldXpath = "//textarea[@aria-label='%s']";
@@ -32,8 +29,7 @@ public class LetterPage extends BasicPage {
 
     public void fillInputElementWithRandomValue(String fieldName) {
         WebElement inputElement = basicDriver.get().findElementByXpath(String.format(inputFieldXpath, fieldName));
-        randomBodyText = wordGenerator();
-        basicDriver.get().input(inputElement, randomBodyText);
+        basicDriver.get().input(inputElement, getGeneratedWord());
     }
 
 
@@ -57,7 +53,7 @@ public class LetterPage extends BasicPage {
 
     public void checkSubjectBox() {
         WebElement subjectBox = basicDriver.get().findElementByXpath(checkSubjectBoxXpath);
-        Assert.assertEquals(subjectBox.getAttribute("value"), randomBodyText);
+        Assert.assertEquals(subjectBox.getAttribute("value"), getGeneratedWord());
     }
 
 
