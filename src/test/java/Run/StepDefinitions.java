@@ -129,6 +129,7 @@ public class StepDefinitions {
         LOG.info(String.format("The template has expected addressee field \"%s\"", value));
     }
 
+
     @Step("The template has subject field as randomly generated text")
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject() {

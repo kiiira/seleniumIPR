@@ -20,13 +20,13 @@ public class LoginPage extends BasicPage {
 
     public void fillEmailFieldWithValue() throws IOException {
         WebElement emailInputField = basicDriver.get().findElementByCssSelector(emailCss);
-        basicDriver.get().input(emailInputField, Utils.readProperties("login", "login.properties"));
+        basicDriver.get().input(emailInputField, Utils.readLoginProperties("login"));
     }
 
 
     public void fillPasswordFieldWithValue() throws IOException {
         WebElement passInputField = basicDriver.get().findElementByCssSelector(passCss);
-        basicDriver.get().input(passInputField, Utils.readProperties("pass", "login.properties"));
+        basicDriver.get().input(passInputField, Utils.readLoginProperties("pass"));
     }
 
 }

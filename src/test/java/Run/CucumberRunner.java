@@ -11,9 +11,8 @@ import static PageObject.BasicPage.shutDown;
 
 
 @CucumberOptions(
-        features = "src/test/resources/features",
-        glue = "Run",
-        plugin = "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
+        features = "src/test/resources/features"
+        , glue = "Run"
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 

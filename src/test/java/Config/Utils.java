@@ -7,7 +7,7 @@ import java.util.Properties;
 public class Utils {
 
 
-    private static ThreadLocal<String> generatedWord = new ThreadLocal<>();
+    public static ThreadLocal<String> generatedWord = new ThreadLocal<>();
 
 
     /**
@@ -29,14 +29,14 @@ public class Utils {
     }
 
     public static String getGeneratedWord() {
-        if (generatedWord.get() == null){
+        if (generatedWord.get() == null) {
             wordGenerator();
         }
         return generatedWord.get();
     }
 
-    public static String readProperties(String key, String fileName) throws IOException {
-        FileReader reader = new FileReader(fileName);
+    public static String readLoginProperties(String key) throws IOException {
+        FileReader reader = new FileReader("login.properties");
         Properties properties = new Properties();
         properties.load(reader);
         return properties.getProperty(key);
