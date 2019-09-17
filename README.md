@@ -4,6 +4,7 @@
 ```
 java -jar jenkins.war 
 ```
+jenkins only supports jdk 8 through 11
 
 **free needed port:**
 ```
