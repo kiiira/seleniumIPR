@@ -1,6 +1,6 @@
 package Run;
 
-import Config.Stuff.Utils;
+import Config.Utils;
 import PageObject.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -50,6 +50,7 @@ public class StepDefinitions {
     }
 
 
+    @Step ("Pressing \"{0}\" button")
     @And("^press \"([^\"]*)\" button$")
     public void pressButton(String buttonLabel) {
         loginPage.pressButton(buttonLabel);
@@ -57,6 +58,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Clicking \"{0}\" div button")
     @And("^click \"([^\"]*)\" div button$")
     public void clickDivButton(String divButtonLabel) {
         mailPage.clickDivButton(divButtonLabel);
@@ -64,6 +66,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Filling \"{0}\" addressee field with value {1}")
     @And("^fill \"([^\"]*)\" addressee field with value \"([^\"]*)\"$")
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
         letterPage.fillTextAreaElementWithValue(fieldLabel, value);
@@ -71,6 +74,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Filling \"{0}\" subject field with random value {fieldLabel}")
     @And("^fill \"([^\"]*)\" subject field with random value$")
     public void fillInputFieldValue(String fieldLabel) {
         letterPage.fillInputElementWithRandomValue(fieldLabel);
@@ -78,6 +82,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Filling \"{0}\" text field with value {1}")
     @And("^fill \"([^\"]*)\" text field with value \"([^\"]*)\"$")
     public void fillDivTextFieldWithRandomValue(String fieldLabel, String inputText) {
         letterPage.fillDivTextFieldWithValue(fieldLabel, inputText);
@@ -85,6 +90,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Clicking \"{0}\" button in letter title bar")
     @And("^click \"([^\"]*)\" button in letter title bar$")
     public void clickButtonInLetterTitleBar(String button) {
         letterPage.pressTitleBarButton(button);
@@ -92,6 +98,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Navigating to \"{0}\" folder")
     @And("^go to \"([^\"]*)\" folder$")
     public void goToFolder(String folderLabel) {
         mailPage.openFolder(folderLabel);
@@ -99,6 +106,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("The letter has been created.")
     @And("^the letter has been created$")
     public void checkLetterCreated() {
         sentLettersPage.checkLetterCreated();
@@ -106,6 +114,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Opening the newly created template")
     @And("^open the newly created template$")
     public void openTheTemplate() {
         templatesPage.openTemplate();
@@ -113,13 +122,14 @@ public class StepDefinitions {
     }
 
 
+    @Step("The template has addressee field as \"{0}\"")
     @And("^the template has addressee field as \"([^\"]*)\"$")
     public void checkTemplateAddressee(String value) {
         letterPage.checkAddressee(value);
         LOG.info(String.format("The template has expected addressee field \"%s\"", value));
     }
 
-
+    @Step("The template has subject field as randomly generated text")
     @And("^the template has subject field as randomly generated text$")
     public void checkTemplateSubject() {
         letterPage.checkSubjectBox();
@@ -127,6 +137,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("The template has body field as \"{0}\"")
     @And("^the template has body field as \"([^\"]*)\"$")
     public void checkTemplateBody(String expectedLetterBody) {
         letterPage.checkLetterBody(expectedLetterBody);
@@ -134,6 +145,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("Press \"{0}\" button in letter window")
     @And("^press \"([^\"]*)\" button in letter window$")
     public void pressButtonInLetterWindow(String buttonLabel) {
         letterPage.clickButtonInLetterWindow(buttonLabel);
@@ -141,6 +153,7 @@ public class StepDefinitions {
     }
 
 
+    @Step("The template has been deleted")
     @Then("^the template has been deleted$")
     public void theTemplateHasBeenDeleted() {
         templatesPage.checkTemplateDeleted();
@@ -148,12 +161,14 @@ public class StepDefinitions {
     }
 
 
+    @Step("Pressing account button")
     @And("^press account button$")
     public void pressAccountButton() {
         mainPage.clickAccountButton();
         LOG.info("Pressing account button");
     }
 
+    @Step("Pressing \"{0}\" button in account popup")
     @And("^press \"([^\"]*)\" button in account popup$")
     public void pressAccountActionButton(String buttonName) {
         mainPage.clickAccountActionButton(buttonName);

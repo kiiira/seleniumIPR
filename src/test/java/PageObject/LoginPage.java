@@ -1,5 +1,6 @@
 package PageObject;
 
+import Config.Utils;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
@@ -19,13 +20,13 @@ public class LoginPage extends BasicPage {
 
     public void fillEmailFieldWithValue() throws IOException {
         WebElement emailInputField = basicDriver.get().findElementByCssSelector(emailCss);
-        basicDriver.get().input(emailInputField, readLoginProperties("login"));
+        basicDriver.get().input(emailInputField, Utils.readProperties("login", "login.properties"));
     }
 
 
     public void fillPasswordFieldWithValue() throws IOException {
         WebElement passInputField = basicDriver.get().findElementByCssSelector(passCss);
-        basicDriver.get().input(passInputField, readLoginProperties("pass"));
+        basicDriver.get().input(passInputField, Utils.readProperties("pass", "login.properties"));
     }
 
 }

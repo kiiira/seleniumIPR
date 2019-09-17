@@ -1,9 +1,13 @@
-package Config.Stuff;
+package Config;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 public class Utils {
 
 
-    public static ThreadLocal<String> generatedWord = new ThreadLocal<>();
+    private static ThreadLocal<String> generatedWord = new ThreadLocal<>();
 
 
     /**
@@ -29,5 +33,12 @@ public class Utils {
             wordGenerator();
         }
         return generatedWord.get();
+    }
+
+    public static String readProperties(String key, String fileName) throws IOException {
+        FileReader reader = new FileReader(fileName);
+        Properties properties = new Properties();
+        properties.load(reader);
+        return properties.getProperty(key);
     }
 }

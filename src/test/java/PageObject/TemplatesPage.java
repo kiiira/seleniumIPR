@@ -1,6 +1,6 @@
 package PageObject;
 
-import Config.Stuff.Utils;
+import Config.Utils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
