@@ -4,7 +4,8 @@
 ```
 java -jar jenkins.war 
 ```
-jenkins only supports jdk 8 through 11
+(jenkins only supports jdk 8 through 11)
+check it: http://localhost:8080/
 
 **free needed port:**
 ```
