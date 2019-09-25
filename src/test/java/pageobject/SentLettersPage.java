@@ -1,6 +1,6 @@
-package PageObject;
+package pageobject;
 
-import Config.Utils;
+import config.Utils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -16,7 +16,7 @@ public class SentLettersPage extends BasicPage {
 
     public void checkLetterCreated() {
         List<WebElement> templates = basicDriver.get().findElementListByXpath((lettersXpath));
-        WebElement template = templates.stream().findFirst().get();
+        WebElement template = templates.get(0);
         Assert.assertEquals(template.getText(), Utils.getGeneratedWord(), "The element with given parameters wasn't found.");
 
     }

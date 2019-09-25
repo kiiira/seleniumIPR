@@ -1,10 +1,10 @@
-package PageObject;
+package pageobject;
 
-import Run.BasicDriver;
-import Run.CustomChromeDriver;
-import Run.CustomFirefoxDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import run.BasicDriver;
+import run.CustomChromeDriver;
+import run.CustomFirefoxDriver;
 
 public abstract class BasicPage {
 

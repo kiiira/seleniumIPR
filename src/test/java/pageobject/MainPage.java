@@ -1,4 +1,4 @@
-package PageObject;
+package pageobject;
 
 
 public class MainPage extends BasicPage {

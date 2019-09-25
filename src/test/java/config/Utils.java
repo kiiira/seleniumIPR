@@ -1,4 +1,4 @@
-package Config;
+package config;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,8 +35,8 @@ public class Utils {
         return generatedWord.get();
     }
 
-    public static String readLoginProperties(String key) throws IOException {
-        FileReader reader = new FileReader("login.properties");
+    public static String readProperties(String key) throws IOException {
+        FileReader reader = new FileReader("system.properties");
         Properties properties = new Properties();
         properties.load(reader);
         return properties.getProperty(key);

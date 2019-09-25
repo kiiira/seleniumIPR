@@ -1,4 +1,4 @@
-package Run;
+package run;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
@@ -6,13 +6,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import static PageObject.BasicPage.setUp;
-import static PageObject.BasicPage.shutDown;
+import static pageobject.BasicPage.setUp;
+import static pageobject.BasicPage.shutDown;
 
 
 @CucumberOptions(
         features = "src/test/resources/features"
-        , glue = "Run"
+        , glue = "run"
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 

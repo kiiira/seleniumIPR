@@ -3,13 +3,13 @@
     <test name="FirefoxTest">
         <parameter name="browserName" value="firefox"/>
         <classes>
-            <class name="Run.CucumberRunner"/>
+            <class name="run.CucumberRunner"/>
         </classes>
     </test>
     <test name="ChromeTest">
         <parameter name="browserName" value="chrome"/>
         <classes>
-            <class name="Run.CucumberRunner"/>
+            <class name="run.CucumberRunner"/>
         </classes>
     </test>
 </suite>

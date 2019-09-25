@@ -1,4 +1,4 @@
-package Run;
+package run;
 
 import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
@@ -142,7 +142,7 @@ public abstract class BasicDriver {
      *
      * @return screenshot image in Bytes
      */
-    @Attachment(value="screenshot")
+    @Attachment(value = "screenshot")
     public byte[] getScreenshot() {
         return (((TakesScreenshot) remoteWebDriver).getScreenshotAs(OutputType.BYTES));
     }

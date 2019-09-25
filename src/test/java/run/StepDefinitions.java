@@ -1,7 +1,7 @@
-package Run;
+package run;
 
-import Config.Utils;
-import PageObject.*;
+import config.Utils;
+import pageobject.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -24,7 +24,15 @@ public class StepDefinitions {
 
     private static final Logger LOG = LogManager.getLogger(StepDefinitions.class);
 
-    private String testHost = "https://www.google.com/gmail/";
+    private String testHost;
+
+    {
+        try {
+            testHost = Utils.readProperties("testHost");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Step("Opening test host")

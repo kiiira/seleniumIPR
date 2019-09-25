@@ -1,5 +1,6 @@
-package Run;
+package run;
 
+import config.Utils;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,6 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +19,15 @@ public class CustomChromeDriver extends BasicDriver {
     /**
      * Selenium hub URL
      */
-    private String HUB = "http://localhost:4444/wd/hub";
+    private String HUB;
+
+    {
+        try {
+            HUB = Utils.readProperties("hubUrl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
