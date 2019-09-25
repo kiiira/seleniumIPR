@@ -1,15 +1,18 @@
 package run;
 
 import config.Utils;
-import pageobject.*;
+import cucumber.api.java.AfterStep;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pageobject.*;
 
 import java.io.IOException;
+
+import static pageobject.BasicPage.takeScreenshotAfterStep;
 
 
 public class StepDefinitions {
@@ -35,12 +38,18 @@ public class StepDefinitions {
     }
 
 
+    @AfterStep
+    @Step
+    public void shot() {
+        takeScreenshotAfterStep();
+    }
+
     @Step("Opening test host")
     @Given("open test host")
     public void openHost() {
         basicPage.navigate(this.testHost);
         LOG.info("Test host opened");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -49,7 +58,7 @@ public class StepDefinitions {
     public void fillEMailFieldWithValue() throws IOException {
         loginPage.fillEmailFieldWithValue();
         LOG.info("E-mail field filled");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
     @Step("Filling password field")
@@ -57,7 +66,7 @@ public class StepDefinitions {
     public void fillPasswordFieldWithValue() throws IOException {
         loginPage.fillPasswordFieldWithValue();
         LOG.info("Password field filled");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -66,7 +75,7 @@ public class StepDefinitions {
     public void pressButton(String buttonLabel) {
         loginPage.pressButton(buttonLabel);
         LOG.info(String.format("\"%s\" button pressed", buttonLabel));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -75,7 +84,7 @@ public class StepDefinitions {
     public void clickDivButton(String divButtonLabel) {
         mailPage.clickDivButton(divButtonLabel);
         LOG.info(String.format("\"%s\" div button pressed", divButtonLabel));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -84,7 +93,7 @@ public class StepDefinitions {
     public void fillTextAreaFieldWithValue(String fieldLabel, String value) {
         letterPage.fillTextAreaElementWithValue(fieldLabel, value);
         LOG.info(String.format("Text area \"%s\" filled with value \"%s\"", fieldLabel, value));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -93,7 +102,7 @@ public class StepDefinitions {
     public void fillInputFieldValue(String fieldLabel) {
         letterPage.fillInputElementWithRandomValue(fieldLabel);
         LOG.info(String.format("Input fields filled with value \"%s\"", fieldLabel));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -102,7 +111,7 @@ public class StepDefinitions {
     public void fillDivTextFieldWithRandomValue(String fieldLabel, String inputText) {
         letterPage.fillDivTextFieldWithValue(fieldLabel, inputText);
         LOG.info(String.format("Div text field \"%s\" filled with value \"%s\"", fieldLabel, inputText));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -111,7 +120,7 @@ public class StepDefinitions {
     public void clickButtonInLetterTitleBar(String button) {
         letterPage.pressTitleBarButton(button);
         LOG.info(String.format("\"%s\" button clicked in letter title bar", button));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -120,7 +129,7 @@ public class StepDefinitions {
     public void goToFolder(String folderLabel) {
         mailPage.openFolder(folderLabel);
         LOG.info(String.format("Navigating to folder \"%s\"", folderLabel));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -129,7 +138,7 @@ public class StepDefinitions {
     public void checkLetterCreated() {
         sentLettersPage.checkLetterCreated();
         LOG.info("Congratulations! The letter has been created");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -138,7 +147,7 @@ public class StepDefinitions {
     public void openTheTemplate() {
         templatesPage.openTemplate();
         LOG.info("Opening the newly created template");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -147,7 +156,7 @@ public class StepDefinitions {
     public void checkTemplateAddressee(String value) {
         letterPage.checkAddressee(value);
         LOG.info(String.format("The template has expected addressee field \"%s\"", value));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -156,7 +165,7 @@ public class StepDefinitions {
     public void checkTemplateSubject() {
         letterPage.checkSubjectBox();
         LOG.info(String.format("The template has subject field as randomly generated text: \"%s\"", Utils.getGeneratedWord()));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -165,7 +174,7 @@ public class StepDefinitions {
     public void checkTemplateBody(String expectedLetterBody) {
         letterPage.checkLetterBody(expectedLetterBody);
         LOG.info(String.format("The template has body field as \"%s\"", expectedLetterBody));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -174,7 +183,7 @@ public class StepDefinitions {
     public void pressButtonInLetterWindow(String buttonLabel) {
         letterPage.clickButtonInLetterWindow(buttonLabel);
         LOG.info(String.format("Pressing \"%s\" button in letter window", buttonLabel));
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -183,7 +192,7 @@ public class StepDefinitions {
     public void theTemplateHasBeenDeleted() {
         templatesPage.checkTemplateDeleted();
         LOG.info("The template has been successfully deleted");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 
@@ -192,7 +201,7 @@ public class StepDefinitions {
     public void pressAccountButton() {
         mainPage.clickAccountButton();
         LOG.info("Pressing account button");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
     @Step("Pressing \"{0}\" button in account popup")
@@ -200,7 +209,7 @@ public class StepDefinitions {
     public void pressAccountActionButton(String buttonName) {
         mainPage.clickAccountActionButton(buttonName);
         LOG.info("Pressing account button");
-        basicPage.takeScreenshotAfterStep();
+
     }
 
 }

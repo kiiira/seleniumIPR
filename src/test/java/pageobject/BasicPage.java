@@ -34,7 +34,7 @@ public abstract class BasicPage {
     }
 
 
-    public void takeScreenshotAfterStep() {
+    public static void takeScreenshotAfterStep() {
         basicDriver.get().getScreenshot();
     }
 
