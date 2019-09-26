@@ -65,6 +65,7 @@ public class CustomChromeDriver extends BasicDriver {
         }
 
         ChromeOptions options = new ChromeOptions();
+        options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
 
         wait = new WebDriverWait(remoteWebDriver, 10);
 
