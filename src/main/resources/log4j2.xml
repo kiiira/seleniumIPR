@@ -3,7 +3,7 @@
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <!-- since log might be messed up, it writes thread number ([%thread])
-                 e.g: "[TestNG-tests-1]"-->
+                 e.g.: "[TestNG-tests-1]"-->
             <PatternLayout pattern="%d{ABSOLUTE} %level{length=5} [%thread] %logger{1} - %msg%n"/>
         </Console>
 
